@@ -5,17 +5,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class RegisterPageCredentials extends AbstractPage {
-  private static final String EMAIL_INPUT_FIELD = "//input[@data-testid='validation-email-input']";
-  private static final String PASSWORD_INPUT_FIELD= "//input[@data-testid='validation-password-input']";
-  private static final String CONTINUE_BUTTON = "//button[@data-testid='validation-submit-button']";
-
-  @FindBy(xpath = EMAIL_INPUT_FIELD)
+  @FindBy(id = "emailInput--inputtext--input")
   private WebElement emailField;
 
-  @FindBy(xpath = PASSWORD_INPUT_FIELD)
+  @FindBy(id = "passwordInput--inputtext--input")
   private WebElement passwordField;
 
-  @FindBy(xpath = CONTINUE_BUTTON)
+  @FindBy(xpath ="//button[@data-testid='validation-submit-button']")
   private WebElement continueButton;
 
   public RegisterPageCredentials() {
@@ -23,11 +19,8 @@ public class RegisterPageCredentials extends AbstractPage {
     PageFactory.initElements(driver, this);
   }
 
-  public void EmailFieldSendKeys(String email) {
+  public void EmailFieldSendKeys(String email, String password) {
     waitForVisibilityAndSendKeys(emailField, email);
-  }
-
-  public void PasswordFieldSendKeys(String password) {
     waitForVisibilityAndSendKeys(passwordField, password);
   }
 
