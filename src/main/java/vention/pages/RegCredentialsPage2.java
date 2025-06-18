@@ -18,7 +18,7 @@ public class RegCredentialsPage2 extends AbstractPage {
   @FindBy(id = "countrycode")
   private WebElement selectPhoneNumber;
 
-  @FindBy(id="phoneNumber--inputtext--input")
+  @FindBy(id = "phoneNumber--inputtext--input")
   private WebElement inputPhoneNumber;
 
   @FindBy(xpath = "//button[@data-testid='register-submit-button']")

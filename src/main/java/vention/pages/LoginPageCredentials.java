@@ -22,7 +22,7 @@ public class LoginPageCredentials extends AbstractPage {
     PageFactory.initElements(driver, this);
   }
 
-  public void SendKeys(String email, String password) {
+  public void SendLoginCredentials(String email, String password) {
     waitForVisibilityAndSendKeys(emailField, email);
     waitForVisibilityAndSendKeys(passwordField, password);
   }

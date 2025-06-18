@@ -11,7 +11,7 @@ public class RegisterPageCredentials extends AbstractPage {
   @FindBy(id = "passwordInput--inputtext--input")
   private WebElement passwordField;
 
-  @FindBy(xpath ="//button[@data-testid='validation-submit-button']")
+  @FindBy(xpath = "//button[@data-testid='validation-submit-button']")
   private WebElement continueButton;
 
   public RegisterPageCredentials() {
@@ -19,7 +19,7 @@ public class RegisterPageCredentials extends AbstractPage {
     PageFactory.initElements(driver, this);
   }
 
-  public void EmailFieldSendKeys(String email, String password) {
+  public void SendRegisterCredentials(String email, String password) {
     waitForVisibilityAndSendKeys(emailField, email);
     waitForVisibilityAndSendKeys(passwordField, password);
   }
