@@ -1,4 +1,4 @@
-package subMain.configLoader;
+package vention.configLoader;
 
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -1,6 +1,6 @@
-package subMain.pages;
+package vention.pages;
 
-import subMain.driver.DriverManager;
+import vention.driver.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
