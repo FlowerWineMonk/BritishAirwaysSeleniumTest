@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.seleninum.By;
 
-public class CreateProfilePage extends AbstractPage {
+public class CreateProfilePage extends BasePage {
   @FindBy(id = "title")
   private WebElement selectTitle;
 

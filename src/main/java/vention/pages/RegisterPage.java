@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegisterPage extends AbstractPage {
+public class RegisterPage extends BasePage {
   @FindBy(id = "emailInput--inputtext--input")
   private WebElement emailField;
 

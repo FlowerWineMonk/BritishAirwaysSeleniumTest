@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class PreLoginPage extends AbstractPage {
+public class PreLoginPage extends BasePage {
   @FindBy(xpath = "//button[@data-testid='login-button']")
   private WebElement loginBtn;
 

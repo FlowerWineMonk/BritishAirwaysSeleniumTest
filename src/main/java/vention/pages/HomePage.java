@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage extends AbstractPage {
+public class HomePage extends BasePage {
   @FindBy(id = "log-button")
   private WebElement loginBtn;
 

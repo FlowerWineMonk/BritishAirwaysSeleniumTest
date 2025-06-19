@@ -16,7 +16,7 @@ public class DriverFactory {
         driver = getFirefoxDriver();
         break;
       default:
-        throw new IllegalArgumentException("Unsupported browser: " + browser);
+        throw new IllegalArgumentException("Unsupported browser (use either chrome or firefox): " + browser);
     }
     return driver;
   }

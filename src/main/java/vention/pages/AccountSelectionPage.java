@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class AccountSelectionPage extends AbstractPage {
+public class AccountSelectionPage extends BasePage {
   @FindBy(id="remove-family-friend")
   private WebElement continueBtn;
 
