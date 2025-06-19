@@ -5,22 +5,32 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends AbstractPage {
-  @FindBy(xpath = "//button[@data-testid='login-button']")
-  private WebElement LoginBtn;
+  @FindBy(id = "username")
+  private WebElement emailField;
 
-  @FindBy(xpath = "//button[@data-testid='register-button']")
-  private WebElement RegisterBtn;
+  @FindBy(id = "password")
+  private WebElement passwordField;
+
+  @FindBy(xpath = "//div[@id='checkbox']")
+  private WebElement captchaField;
+
+  @FindBy(xpath = "//button[@name='action']")
+  private WebElement nextBtn;
 
   public LoginPage() {
     super();
-    PageFactory.initElements(driver, this);
   }
 
-  public void LoginBtnClick() {
-    waitForVisibilityAndClick(LoginBtn);
+  public void fillLoginCredentials(String email, String password) {
+    waitForVisibilityAndSendKeys(emailField, email);
+    waitForVisibilityAndSendKeys(passwordField, password);
   }
 
-  public void RegisterBtnClick() {
-    waitForVisibilityAndClick(RegisterBtn);
+  public void clickCaptchaField() {
+    waitForVisibilityAndClick(captchaField);
+  }
+
+  public void clickNextBtn() {
+    waitForVisibilityAndClick(nextBtn);
   }
 }

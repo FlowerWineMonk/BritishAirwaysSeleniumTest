@@ -5,50 +5,49 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.seleninum.By;
 
-public class RegCredentialsPage2 extends AbstractPage {
+public class CreateProfilePage extends AbstractPage {
   @FindBy(id = "title")
   private WebElement selectTitle;
 
   @FindBy(id = "firstname--inputtext--input")
-  private WebElement inputFirstName;
+  private WebElement firstNameField;
 
   @FindBy(id = "lastname--inputtext--input")
-  private WebElement inputLastName;
+  private WebElement lastNameField;
 
   @FindBy(id = "countrycode")
   private WebElement selectPhoneNumber;
 
   @FindBy(id = "phoneNumber--inputtext--input")
-  private WebElement inputPhoneNumber;
+  private WebElement phoneNumberField;
 
   @FindBy(xpath = "//button[@data-testid='register-submit-button']")
-  private WebElement registerButton;
+  private WebElement registerBtn;
 
-  public RegCredentialsPage2() {
+  public CreateProfilePage() {
     super();
-    PageFactory.initElements(driver, this);
   }
 
-  public void chooseTitle() {
-    waitForVisibilityAndClick(selectTitle);
+  public void chooseTitle(String titleValue) {
+    waitForVisibilityAndClick(selectTitle) {
     driver.findElement(By.xpath("//option[@value='" + titleValue + "']")).click();
   }
 
-  public void inputCredentials(String firstName, String lastName) {
-    waitForVisibilityAndSendKeys(inputFirstName, firstName);
-    waitForVisibilityAndSendKeys(inputLastName, lastName);
+  public void fillNameCredentials(String firstName, String lastName) {
+    waitForVisibilityAndSendKeys(firstNameField, firstName);
+    waitForVisibilityAndSendKeys(lastNameField, lastName);
   }
 
-  public void chooseCountryCode() {
+  public void chooseCountryCode(String code) {
     waitForVisibilityAndClick(selectPhoneNumber);
     driver.findElement(By.xpath("//option[@value='" + code + "']")).click();
   }
 
-  public void inputPhoneNumber(String phoneNumber) {
-    waitForVisibilityAndSendKeys(inputPhoneNumber, phoneNumber);
+  public void fillPhoneNumber(String phoneNumber) {
+    waitForVisibilityAndSendKeys(phoneNumberField, phoneNumber);
   }
 
-  public void clickRegisterButton() {
-    waitForVisibilityAndClick(registerButton);
+  public void clickRegisterBtn() {
+    waitForVisibilityAndClick(registerBtn);
   }
 }
