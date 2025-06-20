@@ -1,4 +1,4 @@
-package vention.pages;
+package vention.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
-  private static WebDriver createLocalDriver(String browser) {
+  public static WebDriver createLocalDriver(String browser) {
     WebDriver driver = null;
     switch (browser.toLowerCase()) {
       case "chrome":
@@ -16,8 +16,9 @@ public class DriverFactory {
         driver = getFirefoxDriver();
         break;
       default:
-        throw new IllegalArgumentException("Unsupported browser (use either chrome or firefox): " + browser);
+        throw new IllegalArgumentException("Unsupported browser: " + browser);
     }
+    driver.manage().window().fullscreen();
     return driver;
   }
 
