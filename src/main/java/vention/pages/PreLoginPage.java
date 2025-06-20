@@ -1,0 +1,32 @@
+package vention.pages;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class PreLoginPage extends BasePage {
+  @FindBy(xpath = "//button[@data-testid='login-button']")
+  private WebElement loginBtn;
+
+  @FindBy(xpath = "//button[@data-testid='register-button']")
+  private WebElement registerBtn;
+
+  public PreLoginPage() {
+    super();
+  }
+
+  public void clickLoginBtn() {
+    waitForVisibilityAndClick(loginBtn);
+  }
+
+  public void clickRegisterBtn() {
+    waitForVisibilityAndClick(registerBtn);
+  }
+
+  public boolean isLoginBtnDisplayed() {
+    return loginBtn.isDisplayed();
+  }
+
+  public boolean isRegisterBtnDisplayed() {
+    return registerBtn.isDisplayed();
+  }
+}
