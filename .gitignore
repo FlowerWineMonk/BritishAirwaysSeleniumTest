@@ -4,3 +4,4 @@ src/main/java/vention/pages/AccountSelectionPage.java
 src/main/java/vention/pages/CreateProfilePage.java
 src/main/java/vention/pages/RegisterPage.java
 src/main/java/vention/pages/HomePage.java
+src/main/java/vention/pages/PreLoginPage.java
