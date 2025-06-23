@@ -5,3 +5,4 @@ src/main/java/vention/pages/CreateProfilePage.java
 src/main/java/vention/pages/RegisterPage.java
 src/main/java/vention/pages/HomePage.java
 notes.txt
+src/test/java/vention/pagesTest/RegistrationFlowTest.java

@@ -2,7 +2,7 @@
 <suite name="AutomationSuite" parallel="classes" thread-count="1">
   <test name="Tests">
     <classes>
-      <class name="vention.pagesTest.LoginPageTest"/>
+      <class name="vention.pagesTest.LoginFlowTest"/>
     </classes>
   </test>
 </suite>
