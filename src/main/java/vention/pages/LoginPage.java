@@ -10,9 +10,6 @@ public class LoginPage extends BasePage {
   @FindBy(id = "password")
   private WebElement passwordField;
 
-//  @FindBy(xpath = "//div[@id='checkbox']")
-//  private WebElement captchaField;
-
   @FindBy(xpath = "//button[@name='action']")
   private WebElement nextBtn;
 
@@ -25,10 +22,6 @@ public class LoginPage extends BasePage {
     waitForVisibilityAndSendKeys(passwordField, password);
   }
 
-//  public void clickCaptchaField() {
-//    waitForVisibilityAndClick(captchaField);
-//  }
-
   public void clickNextBtn() {
     waitForVisibilityAndClick(nextBtn);
   }
@@ -40,11 +33,7 @@ public class LoginPage extends BasePage {
   public boolean isPasswordFieldDisplayed() {
     return passwordField.isDisplayed();
   }
-
-//  public boolean isCaptchaFieldDisplayed() {
-//    return captchaField.isDisplayed();
-//  }
-
+ 
   public boolean isNextBtnDisplayed() {
     return nextBtn.isDisplayed();
   }
