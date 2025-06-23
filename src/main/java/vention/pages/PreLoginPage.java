@@ -21,12 +21,4 @@ public class PreLoginPage extends BasePage {
   public void clickRegisterBtn() {
     waitForVisibilityAndClick(registerBtn);
   }
-
-  public boolean isLoginBtnDisplayed() {
-    return loginBtn.isDisplayed();
-  }
-
-  public boolean isRegisterBtnDisplayed() {
-    return registerBtn.isDisplayed();
-  }
 }
