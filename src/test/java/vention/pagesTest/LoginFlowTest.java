@@ -6,7 +6,6 @@ import vention.pages.CookiePopupPage;
 import vention.pages.PreLoginPage;
 import vention.pages.LoginPage;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
