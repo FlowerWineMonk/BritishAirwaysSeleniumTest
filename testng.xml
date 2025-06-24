@@ -5,6 +5,7 @@
       <class name="vention.pagesTest.BookFlowTest"/>
       <class name="vention.pagesTest.LoginFlowTest"/>
       <class name="vention.pagesTest.RegistrationFlowTest"/>
+      <class name="vention.pagesTest.HomePageLearnMoreTest"/>
     </classes>
   </test>
 </suite>

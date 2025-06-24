@@ -20,7 +20,7 @@ public class HomePage extends BasePage {
   @FindBy(id = "flight-search-tab-inputs-flights-button-find-flights")
   private WebElement findFlightsBtn;
 
-  @FindBy(xpath = "//button[@data-testid='amex-offer-hero-variant-cta-button']")
+  @FindBy(xpath = "//a[@data-testid='journey-section-card-1-cta--link']")
   private WebElement learnMoreBtn;
 
   public HomePage() {
