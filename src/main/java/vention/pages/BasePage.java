@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.By;
 import java.time.Duration;
 
 public abstract class BasePage {
@@ -28,6 +29,11 @@ public abstract class BasePage {
 
   protected void waitForVisibilityAndClick(WebElement element) {
     waitForClickable(element);
+    element.click();
+  }
+
+  protected void waitForVisibilityAndClickByLocator(By locator) {
+    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
     element.click();
   }
 
