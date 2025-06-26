@@ -1,4 +1,4 @@
 /target
 config/
 notes.txt
-src/test/java/vention/pagesTest/HomePageLearnMoreTest.java
+.env

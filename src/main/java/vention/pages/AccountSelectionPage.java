@@ -4,14 +4,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class AccountSelectionPage extends BasePage {
-  @FindBy(id="remove-family-friend")
-  private WebElement continueBtn;
+  @FindBy(id = "remove-family-friend")
+  private WebElement continueButton;
 
   public AccountSelectionPage() {
     super();
   }
 
-  public void clickContinueWithoutTheBritishAirwaysClubBtn() {
-    waitForVisibilityAndClick(continueBtn);
+  public void clickContinueButton() {
+    waitForClickableAndClick(continueButton, 15);
   }
 }

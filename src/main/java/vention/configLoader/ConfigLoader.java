@@ -5,19 +5,19 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigLoader {
-  private static Properties properties = new Properties();
+  private static final Properties properties = new Properties();
+  private static final String CONFIG_FILE_PATH = "src/test/config/credentials.properties";
 
   static {
-   try {
-      FileInputStream fis = new FileInputStream("src/test/config/credentials.properties");
-      properties.load(fis);
-  } catch (IOException e) {
-      e.printStackTrace();
-      throw new RuntimeException("Could not load config file");
-    }
+      try (FileInputStream fis = new FileInputStream(CONFIG_FILE_PATH)){
+          properties.load(fis);
+      } catch (IOException e) {
+          e.printStackTrace();
+          throw new RuntimeException("Could not load config file");
+      }
   }
 
   public static String get(String key) {
-    return properties.getProperty(key);
+      return properties.getProperty(key);
   }
 }

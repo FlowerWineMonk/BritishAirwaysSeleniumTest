@@ -1,18 +1,19 @@
 package vention.driver;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverFactory {
-  public static WebDriver createLocalDriver(String browser) {
+  public static WebDriver createLocalDriver(BrowserType browser) {
     WebDriver driver = null;
-    switch (browser.toLowerCase()) {
-      case "chrome":
+    switch (browser) {
+      case CHROME:
         driver = getChromeDriver();
         break;
-      case "firefox":
+      case FIREFOX:
         driver = getFirefoxDriver();
         break;
       default:
@@ -23,12 +24,14 @@ public class DriverFactory {
   }
 
   private static WebDriver getChromeDriver() {
-    WebDriverManager.chromedriver().setup();
-    return new ChromeDriver();
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--start-fullscreen");
+    return new ChromeDriver(options);
   }
 
   private static WebDriver getFirefoxDriver() {
-    WebDriverManager.firefoxdriver().setup();
     return new FirefoxDriver();
   }
+
+  public enum BrowserType {CHROME, FIREFOX};
 }

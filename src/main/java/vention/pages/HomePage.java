@@ -6,76 +6,81 @@ import org.openqa.selenium.By;
 
 public class HomePage extends BasePage {
   @FindBy(id = "fare")
-  private WebElement selectFare;
+  private WebElement fareDropDown;
 
   @FindBy(id = "from")
-  private WebElement fromField;
+  private WebElement fromInput;
 
   @FindBy(id = "to")
-  private WebElement toField;
+  private WebElement toInput;
 
   @FindBy(id = "departureDate")
-  private WebElement departureDateField;
+  private WebElement departureDateButton;
 
   @FindBy(id = "flight-search-tab-inputs-flights-button-find-flights")
-  private WebElement findFlightsBtn;
+  private WebElement findFlightsButton;
 
   @FindBy(xpath = "//button[@data-testid='amex-offer-hero-variant-cta-button']")
-  private WebElement learnMoreBtn;
+  private WebElement learnMoreButton;
 
   public HomePage() {
     super();
   }
 
+  @Override
+  public String getRelativePath() {
+    return "/travel/home/public/en_us/";
+  }
+
   public void selectFare(String fareWay) {
-    waitForVisibilityAndClick(selectFare);
-    waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + fareWay + "']"));
+    waitForClickableAndClick(fareDropDown);
+    waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + fareWay + "']"), 10);
   }
 
-  public void fillFromField(String fromCity, String fromCityInfo) {
-    waitForVisibilityAndSendKeys(fromField, fromCity);
-    waitForVisibilityAndClickByLocator(By.id(fromCityInfo));
+  public void enterFromDestination(String fromCity, String fromCityInfo) {
+    waitForVisibilityAndSendKeys(fromInput, fromCity);
+    waitForVisibilityAndClickByLocator(By.id(fromCityInfo), 30);
   }
 
-  public void fillToField(String toCity, String toCityInfo) {
-    waitForVisibilityAndSendKeys(toField, toCity);
-    waitForVisibilityAndClickByLocator(By.id(toCityInfo));
+  public void enterToDestination(String toCity, String toCityInfo) {
+    waitForVisibilityAndSendKeys(toInput, toCity);
+    waitForVisibilityAndClickByLocator(By.id(toCityInfo), 30);
   }
 
-  public void fillDepartureDateAndClick(String date) {
-    waitForVisibilityAndClick(departureDateField);
-    waitForVisibilityAndClickByLocator(By.xpath("//span[@data-testid='" + date + "']"));
+  public void selectDepartureDate(String date) {
+    waitForClickableAndClick(departureDateButton);
+    waitForVisibilityAndClickByLocator(By.xpath("//span[@data-testid='" + date + "']"), 20);
   }
 
-  public void clickFindFlightsBtn() {
-    waitForVisibilityAndClick(findFlightsBtn);
+  public void clickFindFlightsButton() {
+    waitForClickableAndClick(findFlightsButton);
   }
 
-  public void clickLearnMoreBtn() {
-    waitForVisibilityAndClick(learnMoreBtn);
+  public void clickLearnMoreButton() {
+    waitForClickableAndClick(learnMoreButton);
   }
 
   public boolean isSelectFareDisplayed() {
-    return selectFare.isDisplayed();
+    return fareDropDown.isDisplayed();
   }
 
-  public boolean isFromFieldDisplayed() {
-    return fromField.isDisplayed();
+  public boolean isFromInputDisplayed() {
+    return fromInput.isDisplayed();
   }
 
-  public boolean isToFieldDisplayed() {
-    return toField.isDisplayed();
+  public boolean isToInputDisplayed() {
+    return toInput.isDisplayed();
   }
 
-  public boolean isDepartureDateFieldDisplayed() {
-    return departureDateField.isDisplayed();
+  public boolean isDepartureDateButtonDisplayed() {
+    return departureDateButton.isDisplayed();
   }
 
-  public boolean isFindFlightsBtnDisplayed() {
-    return findFlightsBtn.isDisplayed();
+  public boolean isFindFlightsButtonDisplayed() {
+    return findFlightsButton.isDisplayed();
   }
 
-  public boolean isLearnMoreBtnDisplayed() {
-    return learnMoreBtn.isDisplayed();
+  public boolean isLearnMoreButtonDisplayed() {
+    return learnMoreButton.isDisplayed();
   }
 }

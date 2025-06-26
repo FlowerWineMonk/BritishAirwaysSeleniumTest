@@ -6,71 +6,71 @@ import org.openqa.selenium.By;
 
 public class CreateProfilePage extends BasePage {
   @FindBy(id = "title")
-  private WebElement selectTitle;
+  private WebElement titleDropdown;
 
   @FindBy(id = "firstname--inputtext--input")
-  private WebElement firstNameField;
+  private WebElement firstNameInput;
 
   @FindBy(id = "lastname--inputtext--input")
-  private WebElement lastNameField;
+  private WebElement lastNameInput;
 
   @FindBy(id = "countrycode")
-  private WebElement selectPhoneNumber;
+  private WebElement countryCodeDropdown;
 
   @FindBy(id = "phoneNumber--inputtext--input")
-  private WebElement phoneNumberField;
+  private WebElement phoneNumberInput;
 
   @FindBy(xpath = "//button[@data-testid='register-submit-button']")
-  private WebElement registerBtn;
+  private WebElement registerButton;
 
   public CreateProfilePage() {
     super();
   }
 
   public void selectTitle(String titleValue) {
-    waitForVisibilityAndClick(selectTitle);
-    waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + titleValue + "']"));
+    waitForClickableAndClick(titleDropdown);
+    waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + titleValue + "']"), 15);
   }
 
-  public void fillNameCredentials(String firstName, String lastName) {
-    waitForVisibilityAndSendKeys(firstNameField, firstName);
-    waitForVisibilityAndSendKeys(lastNameField, lastName);
+  public void enterNameCredentials(String firstName, String lastName) {
+    waitForVisibilityAndSendKeys(firstNameInput, firstName);
+    waitForVisibilityAndSendKeys(lastNameInput, lastName);
   }
 
   public void selectCountryCode(String code) {
-    waitForVisibilityAndClick(selectPhoneNumber);
-    waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + code + "']"));
+    waitForClickableAndClick(countryCodeDropdown);
+    waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + code + "']"), 15);
   }
 
-  public void fillPhoneNumber(String phoneNumber) {
-    waitForVisibilityAndSendKeys(phoneNumberField, phoneNumber);
+  public void enterPhoneNumber(String phoneNumber) {
+    waitForVisibilityAndSendKeys(phoneNumberInput, phoneNumber);
   }
 
-  public void clickRegisterBtn() {
-    waitForVisibilityAndClick(registerBtn);
+  public void clickRegisterButton() {
+    waitForClickableAndClick(registerButton);
   }
 
-  public boolean isSelectTitleDisplayed() {
-    return selectTitle.isDisplayed();
+  public boolean isTitleDropdownDisplayed() {
+    return titleDropdown.isDisplayed();
   }
 
-  public boolean isFirstNameFieldDisplayed() {
-    return firstNameField.isDisplayed();
+  public boolean isFirstNameInputDisplayed() {
+    return firstNameInput.isDisplayed();
   }
 
-  public boolean isLastNameFieldDisplayed() {
-    return lastNameField.isDisplayed();
+  public boolean isLastNameInputDisplayed() {
+    return lastNameInput.isDisplayed();
   }
 
-  public boolean isSelectPhoneNumberDisplayed() {
-    return selectPhoneNumber.isDisplayed();
+  public boolean isCountryCodeDropdownDisplayed() {
+    return countryCodeDropdown.isDisplayed();
   }
 
-  public boolean isPhoneNumberFieldDisplayed() {
-    return phoneNumberField.isDisplayed();
+  public boolean isPhoneNumberInputDisplayed() {
+    return phoneNumberInput.isDisplayed();
   }
 
-  public boolean isRegisterBtnDisplayed() {
-    return registerBtn.isDisplayed();
+  public boolean isRegisterButtonDisplayed() {
+    return registerButton.isDisplayed();
   }
 }

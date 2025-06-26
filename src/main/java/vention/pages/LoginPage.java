@@ -5,36 +5,36 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
   @FindBy(id = "username")
-  private WebElement emailField;
+  private WebElement emailInput;
 
   @FindBy(id = "password")
-  private WebElement passwordField;
+  private WebElement passwordInput;
 
   @FindBy(xpath = "//button[@name='action']")
-  private WebElement nextBtn;
+  private WebElement nextButton;
 
   public LoginPage() {
     super();
   }
 
-  public void fillLoginCredentials(String email, String password) {
-    waitForVisibilityAndSendKeys(emailField, email);
-    waitForVisibilityAndSendKeys(passwordField, password);
+  public void enterLoginCredentials(String email, String password) {
+    waitForVisibilityAndSendKeys(emailInput, email);
+    waitForVisibilityAndSendKeys(passwordInput, password);
   }
 
-  public void clickNextBtn() {
-    waitForVisibilityAndClick(nextBtn);
+  public void clickNextButton() {
+    waitForClickableAndClick(nextButton);
   }
 
-  public boolean isEmailFieldDisplayed() {
-     return emailField.isDisplayed();
+  public boolean isEmailInputDisplayed() {
+     return emailInput.isDisplayed();
   }
 
-  public boolean isPasswordFieldDisplayed() {
-    return passwordField.isDisplayed();
+  public boolean isPasswordInputDisplayed() {
+    return passwordInput.isDisplayed();
   }
  
-  public boolean isNextBtnDisplayed() {
-    return nextBtn.isDisplayed();
+  public boolean isNextButtonDisplayed() {
+    return nextButton.isDisplayed();
   }
 }

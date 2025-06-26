@@ -8,24 +8,45 @@
   <name>britishairlines</name>
   <url>http://maven.apache.org</url>
 
+  <properties>
+    <testng.version>7.11.0</testng.version>
+    <selenium.version>4.33.0</selenium.version>
+    <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
+    <java.faker.version>1.0.2</java.faker.version>
+    <lombok.version>1.18.38</lombok.version>
+    <cdimascio.version>5.2.2</cdimascio.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>7.11.0</version>
+      <version>${testng.version}</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>4.33.0</version>
+      <version>${selenium.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>io.github.bonigarcia</groupId>
-      <artifactId>webdrivermanager</artifactId>
-      <version>6.1.0</version>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>${java.faker.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.github.cdimascio</groupId>
+      <artifactId>java-dotenv</artifactId>
+      <version>${cdimascio.version}</version>
     </dependency>
   </dependencies>
 
@@ -34,7 +55,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.5</version>
+        <version>${maven.surefire.plugin.version}</version>
         <configuration>
           <suiteXmlFiles>
             <suiteXmlFile>testng.xml</suiteXmlFile>
@@ -43,5 +64,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>

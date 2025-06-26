@@ -5,24 +5,24 @@ import org.openqa.selenium.support.FindBy;
 
 public class RegisterPage extends BasePage {
   @FindBy(id = "emailInput--inputtext--input")
-  private WebElement emailField;
+  private WebElement emailInput;
 
   @FindBy(id = "passwordInput--inputtext--input")
-  private WebElement passwordField;
+  private WebElement passwordInput;
 
   @FindBy(xpath = "//button[@data-testid='validation-submit-button']")
-  private WebElement continueBtn;
+  private WebElement continueButton;
 
   public RegisterPage() {
     super();
   }
 
-  public void fillRegisterCredentials(String email, String password) {
-    waitForVisibilityAndSendKeys(emailField, email);
-    waitForVisibilityAndSendKeys(passwordField, password);
+  public void enterRegisterCredentials(String email, String password) {
+    waitForVisibilityAndSendKeys(emailInput, email);
+    waitForVisibilityAndSendKeys(passwordInput, password);
   }
 
-  public void clickContinueBtn() {
-    waitForVisibilityAndClick(continueBtn);
+  public void clickContinueButton() {
+    waitForClickableAndClick(continueButton);
   }
 }

@@ -5,20 +5,25 @@ import org.openqa.selenium.support.FindBy;
 
 public class PreLoginPage extends BasePage {
   @FindBy(xpath = "//button[@data-testid='login-button']")
-  private WebElement loginBtn;
+  private WebElement loginButton;
 
   @FindBy(xpath = "//button[@data-testid='register-button']")
-  private WebElement registerBtn;
+  private WebElement registerButton;
+
+  @Override
+  public String getRelativePath() {
+    return "/nx/b/account/en/usa/account/pre-login";
+  }
 
   public PreLoginPage() {
     super();
   }
 
-  public void clickLoginBtn() {
-    waitForVisibilityAndClick(loginBtn);
+  public void clickLoginButton() {
+    waitForClickableAndClick(loginButton, 15);
   }
 
-  public void clickRegisterBtn() {
-    waitForVisibilityAndClick(registerBtn);
+  public void clickRegisterButton() {
+    waitForClickableAndClick(registerButton, 15);
   }
 }
