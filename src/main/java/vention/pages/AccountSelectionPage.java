@@ -14,4 +14,8 @@ public class AccountSelectionPage extends BasePage {
   public void clickContinueButton() {
     waitForClickableAndClick(continueButton, 15);
   }
+
+  public boolean isContinueButtonDisplayed() {
+    return continueButton.isDisplayed();
+  }
 }

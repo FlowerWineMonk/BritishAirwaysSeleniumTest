@@ -2,6 +2,7 @@ package vention.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import vention.entity.User;
 
 public class RegisterPage extends BasePage {
   @FindBy(id = "emailInput--inputtext--input")
@@ -17,12 +18,24 @@ public class RegisterPage extends BasePage {
     super();
   }
 
-  public void enterRegisterCredentials(String email, String password) {
-    waitForVisibilityAndSendKeys(emailInput, email);
-    waitForVisibilityAndSendKeys(passwordInput, password);
+  public void enterRegisterCredentials(User user) {
+    waitForVisibilityAndSendKeys(emailInput, user.getEmail());
+    waitForVisibilityAndSendKeys(passwordInput, user.getPassword());
   }
 
   public void clickContinueButton() {
     waitForClickableAndClick(continueButton);
+  }
+
+  public boolean isEmailInputDisplayed() {
+    return emailInput.isDisplayed();
+  }
+
+  public boolean isPasswordInputDisplayed() {
+    return passwordInput.isDisplayed();
+  }
+
+  public boolean isContinueButtonDisplayed() {
+    return continueButton.isDisplayed();
   }
 }

@@ -1,6 +1,5 @@
 package vention.pagesTest;
 
-import vention.configLoader.ConfigLoader;
 import vention.driver.DriverManager;
 import vention.pages.CookiePopup;
 import vention.pages.HomePage;
@@ -11,32 +10,41 @@ import org.testng.asserts.SoftAssert;
 import org.testng.Assert;
 
 public class BookFlowTest extends BaseTest {
+  private static final String FARE_TYPE_ONE_WAY = "oneWay";
+  private static final String FROM_CITY_NAME = "New York";
+  private static final String FROM_CITY_CODE = "new-york,-john-f-kennedy-(ny)-(jfk),-usa";
+  private static final String TO_CITY_NAME = "London";
+  private static final String TO_CITY_CODE = "london,-gatwick-(lgw),-united-kingdom";
+  private static final String DEPARTURE_DATE = "calendar-day-30/06/2025";
+  private static final String HOME_URL = "/home";
+
   private CookiePopup cookiePopup;
   private HomePage homePage;
 
-  @BeforeMethod
-  public void beforeMethod() {
+  @Test
+  public void testBookFlight() {
     homePage = new HomePage();
     homePage.openPage();
 
+    final String actualUrl = DriverManager.getDriver().getCurrentUrl();
+    Assert.assertTrue(actualUrl.contains(HOME_URL), "User should be in home page");
+
     cookiePopup = new CookiePopup();
+    Assert.assertTrue(cookiePopup.isRejectAllButtonDisplayed(), "Cookie popup should be visible during pre-login page with a reject all button");
     cookiePopup.clickRejectAllButton();
-  }
 
-  @Test
-  public void testBookFlight() {
-    SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(homePage.isSelectFareDisplayed(), "Fare dropdown should be visible");
-    softAssert.assertTrue(homePage.isFromInputDisplayed(), "From input should be visible");
-    softAssert.assertTrue(homePage.isToInputDisplayed(), "To input should be visible");
-    softAssert.assertTrue(homePage.isDepartureDateButtonDisplayed(), "Departure date button should be visible");
-    softAssert.assertTrue(homePage.isFindFlightsButtonDisplayed(), "Find flights button should be visible");
-    softAssert.assertAll();
+    SoftAssert loginSoftAssert = new SoftAssert();
+    loginSoftAssert.assertTrue(homePage.isSelectFareDisplayed(), "Fare dropdown should be visible during booking in home page");
+    loginSoftAssert.assertTrue(homePage.isFromInputDisplayed(), "From input should be visible during booking in home page");
+    loginSoftAssert.assertTrue(homePage.isToInputDisplayed(), "To input should be visible during booking in home page");
+    loginSoftAssert.assertTrue(homePage.isDepartureDateButtonDisplayed(), "Departure date button should be visible during booking in home page");
+    loginSoftAssert.assertTrue(homePage.isFindFlightsButtonDisplayed(), "Find flights button should be visible during booking in home page");
+    loginSoftAssert.assertAll();
 
-    homePage.selectFare("oneWay");
-    homePage.enterFromDestination(("New York"), ("new-york,-john-f-kennedy-(ny)-(jfk),-usa"));
-    homePage.enterToDestination(("London"), ("london,-gatwick-(lgw),-united-kingdom"));
-    homePage.selectDepartureDate("calendar-day-30/06/2025");
+    homePage.selectFare(FARE_TYPE_ONE_WAY);
+    homePage.enterFromDestination(FROM_CITY_NAME, FROM_CITY_CODE);
+    homePage.enterToDestination(TO_CITY_NAME, TO_CITY_CODE);
+    homePage.selectDepartureDate(DEPARTURE_DATE);
 
     final String beforeUrl = DriverManager.getDriver().getCurrentUrl();
     homePage.clickFindFlightsButton();

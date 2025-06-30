@@ -8,17 +8,19 @@ public class UserFactory {
 
   public static User getExistingUser() {
     Dotenv dotenv = Dotenv.load();
-    return new User.Builder()
+    return User.builder()
             .email(dotenv.get("EXISTING_USER_EMAIL"))
             .password(dotenv.get("EXISTING_USER_PASSWORD")).build();
   }
 
-  public static User createRandomUser() {
-    return new User.Builder()
+  public static User getRandomUser() {
+    return User.builder()
             .username(faker.name().username())
             .password(faker.internet().password())
             .email(faker.internet().emailAddress())
             .phone(faker.phoneNumber().cellPhone())
+            .firstName(faker.name().firstName())
+            .lastName(faker.name().lastName())
             .build();
   }
 }

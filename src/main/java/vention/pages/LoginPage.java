@@ -2,6 +2,7 @@ package vention.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import vention.entity.User;
 
 public class LoginPage extends BasePage {
   @FindBy(id = "username")
@@ -17,9 +18,9 @@ public class LoginPage extends BasePage {
     super();
   }
 
-  public void enterLoginCredentials(String email, String password) {
-    waitForVisibilityAndSendKeys(emailInput, email);
-    waitForVisibilityAndSendKeys(passwordInput, password);
+  public void enterLoginCredentials(User user) {
+    waitForVisibilityAndSendKeys(emailInput, user.getEmail());
+    waitForVisibilityAndSendKeys(passwordInput, user.getPassword());
   }
 
   public void clickNextButton() {

@@ -14,8 +14,8 @@ public class DriverManager {
   }
 
   public static void quitDriver() {
-    if(DriverManager.getDriver() != null) {
-      DriverManager.getDriver().quit();
+    if(threadLocalDriver.get() != null) {
+      threadLocalDriver.get().quit();
       threadLocalDriver.remove();
     }
   }

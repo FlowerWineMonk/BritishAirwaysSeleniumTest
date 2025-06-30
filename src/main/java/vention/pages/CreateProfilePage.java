@@ -3,6 +3,7 @@ package vention.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
+import vention.entity.User;
 
 public class CreateProfilePage extends BasePage {
   @FindBy(id = "title")
@@ -32,9 +33,9 @@ public class CreateProfilePage extends BasePage {
     waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + titleValue + "']"), 15);
   }
 
-  public void enterNameCredentials(String firstName, String lastName) {
-    waitForVisibilityAndSendKeys(firstNameInput, firstName);
-    waitForVisibilityAndSendKeys(lastNameInput, lastName);
+  public void enterNameCredentials(User user) {
+    waitForVisibilityAndSendKeys(firstNameInput, user.getFirstName());
+    waitForVisibilityAndSendKeys(lastNameInput, user.getLastName());
   }
 
   public void selectCountryCode(String code) {
@@ -42,8 +43,8 @@ public class CreateProfilePage extends BasePage {
     waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + code + "']"), 15);
   }
 
-  public void enterPhoneNumber(String phoneNumber) {
-    waitForVisibilityAndSendKeys(phoneNumberInput, phoneNumber);
+  public void enterPhoneNumber(User user) {
+    waitForVisibilityAndSendKeys(phoneNumberInput, user.getPhone());
   }
 
   public void clickRegisterButton() {

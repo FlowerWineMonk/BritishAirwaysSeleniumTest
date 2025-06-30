@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class PreLoginPage extends BasePage {
+  private static final String PRE_LOGIN_PATH = "/nx/b/account/en/usa/account/pre-login";
+
   @FindBy(xpath = "//button[@data-testid='login-button']")
   private WebElement loginButton;
 
@@ -12,7 +14,7 @@ public class PreLoginPage extends BasePage {
 
   @Override
   public String getRelativePath() {
-    return "/nx/b/account/en/usa/account/pre-login";
+    return PRE_LOGIN_PATH;
   }
 
   public PreLoginPage() {
@@ -25,5 +27,13 @@ public class PreLoginPage extends BasePage {
 
   public void clickRegisterButton() {
     waitForClickableAndClick(registerButton, 15);
+  }
+
+  public boolean isLoginButtonDisplayed() {
+    return loginButton.isDisplayed();
+  }
+
+  public boolean isRegisterButtonDisplayed() {
+    return registerButton.isDisplayed();
   }
 }

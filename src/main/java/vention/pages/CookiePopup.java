@@ -14,4 +14,8 @@ public class CookiePopup extends BasePage {
   public void clickRejectAllButton() {
     waitForClickableAndClick(rejectAllButton);
   }
+
+  public boolean isRejectAllButtonDisplayed() {
+    return rejectAllButton.isDisplayed();
+  }
 }

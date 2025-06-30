@@ -21,12 +21,11 @@ public abstract class BasePage {
   }
 
   public void openPage() {
-    String fullUrl = getBaseUrl() + getRelativePath();
-    DriverManager.getDriver().get(fullUrl);
+    DriverManager.getDriver().get(getBaseUrl() + getRelativePath());
   }
 
   public String getBaseUrl() {
-    return ConfigLoader.get("base-url");
+    return ConfigLoader.get("BASE_URL");
   }
 
   protected WebDriverWait getWait(int seconds) {

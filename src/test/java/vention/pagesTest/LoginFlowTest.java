@@ -14,37 +14,47 @@ import org.testng.Assert;
 
 
 public class LoginFlowTest extends BaseTest {
+  private static final String PRE_LOGIN_URL = "/pre-login";
+  private static final String LOGIN_URL = "/login";
+  private static final String HOME_URL = "/home";
+
   private CookiePopup cookiePopup;
   private PreLoginPage preLoginPage;
   private LoginPage loginPage;
 
-  @BeforeMethod
-  public void beforeMethod() {
+  @Test
+  public void testCompleteUserLoginFlow() {
     preLoginPage = new PreLoginPage();
     preLoginPage.openPage();
 
+    final String actualUrl = DriverManager.getDriver().getCurrentUrl();
+    Assert.assertTrue(actualUrl.contains(PRE_LOGIN_URL), "User should be in pre-login page");
+
     cookiePopup = new CookiePopup();
+    Assert.assertTrue(cookiePopup.isRejectAllButtonDisplayed(), "Cookie popup should be visible during pre-login page with a reject all button");
     cookiePopup.clickRejectAllButton();
 
+    SoftAssert preLoginSoftAssert = new SoftAssert();
+    preLoginSoftAssert.assertTrue(preLoginPage.isLoginButtonDisplayed(), "Login button should be visible during pre-login page");
+    preLoginSoftAssert.assertTrue(preLoginPage.isRegisterButtonDisplayed(), "Register button should be visible during pre-login page");
+    preLoginSoftAssert.assertAll();
     preLoginPage.clickLoginButton();
 
-    loginPage = new LoginPage();
-  }
+    final String actualUrlAfterPreLogin = DriverManager.getDriver().getCurrentUrl();
+    Assert.assertTrue(actualUrlAfterPreLogin.contains(LOGIN_URL), "User should be redirected to the login page after pre-login page");
 
-  @Test
-  public void testCompleteUserLoginFlow() {
-    SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(loginPage.isEmailInputDisplayed(), "Email input should be visible");
-    softAssert.assertTrue(loginPage.isPasswordInputDisplayed(), "Password input should be visible");
-    softAssert.assertTrue(loginPage.isNextButtonDisplayed(), "Next button should be visible");
-    softAssert.assertAll();
+    loginPage = new LoginPage();
+    SoftAssert loginSoftAssert = new SoftAssert();
+    loginSoftAssert.assertTrue(loginPage.isEmailInputDisplayed(), "Email input should be visible during login");
+    loginSoftAssert.assertTrue(loginPage.isPasswordInputDisplayed(), "Password input should be visible during login");
+    loginSoftAssert.assertTrue(loginPage.isNextButtonDisplayed(), "Next button should be visible during login");
+    loginSoftAssert.assertAll();
  
     User existingUser = UserFactory.getExistingUser();
-    loginPage.enterLoginCredentials(existingUser.getEmail(), existingUser.getPassword());
+    loginPage.enterLoginCredentials(existingUser);
     loginPage.clickNextButton();
 
-    final String actualUrl = DriverManager.getDriver().getCurrentUrl();
-    final String expectedUrl = "https://www.britishairways.com/travel/home/public/en_us/";
-    Assert.assertEquals(actualUrl, expectedUrl, "User should be redirected to the home page after login");
+    final String actualUrlAfterLogin = DriverManager.getDriver().getCurrentUrl();
+    Assert.assertTrue(actualUrlAfterLogin.contains(HOME_URL), "User should be redirected to the home page after login");
   }
 }
