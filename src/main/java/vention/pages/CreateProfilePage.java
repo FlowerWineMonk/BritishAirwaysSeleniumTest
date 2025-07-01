@@ -1,11 +1,14 @@
 package vention.pages;
 
+import vention.driver.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 import vention.entity.User;
 
 public class CreateProfilePage extends BasePage {
+  private static final String CREATE_PROFILE_URL = "/register";
+
   @FindBy(id = "title")
   private WebElement titleDropdown;
 
@@ -26,6 +29,11 @@ public class CreateProfilePage extends BasePage {
 
   public CreateProfilePage() {
     super();
+  }
+
+  public boolean isOnCreateProfilePage() {
+    String currentUrl = DriverManager.getDriver().getCurrentUrl();
+    return currentUrl.contains(CREATE_PROFILE_URL);
   }
 
   public void selectTitle(String titleValue) {

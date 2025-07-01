@@ -3,6 +3,7 @@ package vention.pagesTest;
 import vention.driver.DriverManager;
 import vention.pages.CookiePopup;
 import vention.pages.HomePage;
+import vention.enums.Cities;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -11,12 +12,7 @@ import org.testng.Assert;
 
 public class BookFlowTest extends BaseTest {
   private static final String FARE_TYPE_ONE_WAY = "oneWay";
-  private static final String FROM_CITY_NAME = "New York";
-  private static final String FROM_CITY_CODE = "new-york,-john-f-kennedy-(ny)-(jfk),-usa";
-  private static final String TO_CITY_NAME = "London";
-  private static final String TO_CITY_CODE = "london,-gatwick-(lgw),-united-kingdom";
   private static final String DEPARTURE_DATE = "calendar-day-31/08/2025";
-  private static final String HOME_URL = "/home";
 
   private CookiePopup cookiePopup;
   private HomePage homePage;
@@ -26,8 +22,7 @@ public class BookFlowTest extends BaseTest {
     homePage = new HomePage();
     homePage.openPage();
 
-    final String actualUrl = DriverManager.getDriver().getCurrentUrl();
-    Assert.assertTrue(actualUrl.contains(HOME_URL), "User should be in home page");
+    Assert.assertTrue(homePage.isOnHomePage(), "User should be in home page");
 
     cookiePopup = new CookiePopup();
 
@@ -44,8 +39,8 @@ public class BookFlowTest extends BaseTest {
     loginSoftAssert.assertAll();
 
     homePage.selectFare(FARE_TYPE_ONE_WAY);
-    homePage.enterFromDestination(FROM_CITY_NAME, FROM_CITY_CODE);
-    homePage.enterToDestination(TO_CITY_NAME, TO_CITY_CODE);
+    homePage.enterFromDestination(Cities.NEW_YORK.getCityName(), Cities.NEW_YORK.getCityAirport());
+    homePage.enterToDestination(Cities.LONDON.getCityName(), Cities.LONDON.getCityAirport());
     homePage.selectDepartureDate(DEPARTURE_DATE);
 
     final String beforeUrl = DriverManager.getDriver().getCurrentUrl();

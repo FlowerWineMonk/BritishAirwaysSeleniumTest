@@ -1,11 +1,13 @@
 package vention.pages;
 
+import vention.driver.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 
 public class HomePage extends BasePage {
   private static final String RELATIVE_PATH = "/travel/home/public/en_us/";
+  private static final String HOME_URL = "/home";
 
   @FindBy(id = "fare")
   private WebElement fareDropDown;
@@ -32,6 +34,11 @@ public class HomePage extends BasePage {
   @Override
   public String getRelativePath() {
     return RELATIVE_PATH;
+  }
+
+  public boolean isOnHomePage() {
+    String currentUrl = DriverManager.getDriver().getCurrentUrl();
+    return currentUrl.contains(HOME_URL);
   }
 
   public void selectFare(String fareWay) {

@@ -1,10 +1,13 @@
 package vention.pages;
 
+import vention.driver.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import vention.entity.User;
 
 public class LoginPage extends BasePage {
+  private static final String LOGIN_URL = "/login";
+
   @FindBy(id = "username")
   private WebElement emailInput;
 
@@ -16,6 +19,11 @@ public class LoginPage extends BasePage {
 
   public LoginPage() {
     super();
+  }
+
+  public boolean isOnLoginPage() {
+    String currentUrl = DriverManager.getDriver().getCurrentUrl();
+    return currentUrl.contains(LOGIN_URL);
   }
 
   public void enterLoginCredentials(User user) {

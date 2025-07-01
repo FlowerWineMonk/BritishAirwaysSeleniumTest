@@ -1,10 +1,12 @@
 package vention.pages;
 
+import vention.driver.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class PreLoginPage extends BasePage {
   private static final String RELATIVE_PATH = "/nx/b/account/en/usa/account/pre-login";
+  private static final String PRE_LOGIN_URL = "/pre-login";
 
   @FindBy(xpath = "//button[@data-testid='login-button']")
   private WebElement loginButton;
@@ -19,6 +21,11 @@ public class PreLoginPage extends BasePage {
 
   public PreLoginPage() {
     super();
+  }
+
+  public boolean isOnPreLoginPage() {
+    String currentUrl = DriverManager.getDriver().getCurrentUrl();
+    return currentUrl.contains(PRE_LOGIN_URL);
   }
 
   public void clickLoginButton() {

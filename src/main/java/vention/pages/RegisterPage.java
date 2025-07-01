@@ -1,10 +1,13 @@
 package vention.pages;
 
+import vention.driver.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import vention.entity.User;
 
 public class RegisterPage extends BasePage {
+  private static final String REGISTER_URL = "/email-validation";
+
   @FindBy(id = "emailInput--inputtext--input")
   private WebElement emailInput;
 
@@ -16,6 +19,11 @@ public class RegisterPage extends BasePage {
 
   public RegisterPage() {
     super();
+  }
+ 
+  public boolean isOnRegisterPage() {
+    String currentUrl = DriverManager.getDriver().getCurrentUrl();
+    return currentUrl.contains(REGISTER_URL);
   }
 
   public void enterRegisterCredentials(User user) {
