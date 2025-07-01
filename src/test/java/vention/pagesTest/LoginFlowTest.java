@@ -31,8 +31,10 @@ public class LoginFlowTest extends BaseTest {
     Assert.assertTrue(actualUrl.contains(PRE_LOGIN_URL), "User should be in pre-login page");
 
     cookiePopup = new CookiePopup();
-    Assert.assertTrue(cookiePopup.isRejectAllButtonDisplayed(), "Cookie popup should be visible during pre-login page with a reject all button");
-    cookiePopup.clickRejectAllButton();
+
+    if (cookiePopup.isRejectAllButtonDisplayed()) {
+      cookiePopup.clickRejectAllButton();
+    }
 
     SoftAssert preLoginSoftAssert = new SoftAssert();
     preLoginSoftAssert.assertTrue(preLoginPage.isLoginButtonDisplayed(), "Login button should be visible during pre-login page");

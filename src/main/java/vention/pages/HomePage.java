@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 
 public class HomePage extends BasePage {
-  private static final String HOME_PATH = "/travel/home/public/en_us/";
+  private static final String RELATIVE_PATH = "/travel/home/public/en_us/";
 
   @FindBy(id = "fare")
   private WebElement fareDropDown;
@@ -31,7 +31,7 @@ public class HomePage extends BasePage {
 
   @Override
   public String getRelativePath() {
-    return HOME_PATH;
+    return RELATIVE_PATH;
   }
 
   public void selectFare(String fareWay) {

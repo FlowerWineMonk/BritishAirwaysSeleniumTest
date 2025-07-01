@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class PreLoginPage extends BasePage {
-  private static final String PRE_LOGIN_PATH = "/nx/b/account/en/usa/account/pre-login";
+  private static final String RELATIVE_PATH = "/nx/b/account/en/usa/account/pre-login";
 
   @FindBy(xpath = "//button[@data-testid='login-button']")
   private WebElement loginButton;
@@ -14,7 +14,7 @@ public class PreLoginPage extends BasePage {
 
   @Override
   public String getRelativePath() {
-    return PRE_LOGIN_PATH;
+    return RELATIVE_PATH;
   }
 
   public PreLoginPage() {
