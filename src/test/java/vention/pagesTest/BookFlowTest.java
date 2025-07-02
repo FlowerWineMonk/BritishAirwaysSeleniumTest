@@ -22,7 +22,7 @@ public class BookFlowTest extends BaseTest {
     homePage = new HomePage();
     homePage.openPage();
 
-    Assert.assertTrue(homePage.isOnHomePage(), "User should be in home page");
+    Assert.assertTrue(homePage.isPageOpened(), "User should be in home page");
 
     cookiePopup = new CookiePopup();
 

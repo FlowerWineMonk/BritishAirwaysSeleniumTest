@@ -14,8 +14,8 @@ import org.testng.asserts.SoftAssert;
 import org.testng.Assert;
 
 public class RegistrationFlowTest extends BaseTest {
-  private static final String SELECT_TITLE = "Mr";
-  private static final String SELECT_COUNTRY_CODE = "+1";
+  private static final String TITLE_VALUE = "Mr";
+  private static final String COUNTRY_CODE_VALUE = "+1";
 
   private CookiePopup cookiePopup;
   private PreLoginPage preLoginPage;
@@ -29,7 +29,7 @@ public class RegistrationFlowTest extends BaseTest {
     preLoginPage = new PreLoginPage();
     preLoginPage.openPage();
 
-    Assert.assertTrue(preLoginPage.isOnPreLoginPage(), "User should be in pre-login page");
+    Assert.assertTrue(preLoginPage.isPageOpened(), "User should be in pre-login page");
 
     cookiePopup = new CookiePopup();
 
@@ -45,7 +45,7 @@ public class RegistrationFlowTest extends BaseTest {
 
     User newUser = UserFactory.getRandomUser();
     registerPage = new RegisterPage();
-    Assert.assertTrue(registerPage.isOnRegisterPage(), "User should be redirected to the register page after pre-login page");
+    Assert.assertTrue(registerPage.isPageOpened(), "User should be redirected to the register page after pre-login page");
 
     SoftAssert registerSoftAssert = new SoftAssert();
     registerSoftAssert.assertTrue(registerPage.isEmailInputDisplayed(), "Email input should be visible during register page");
@@ -56,12 +56,12 @@ public class RegistrationFlowTest extends BaseTest {
     registerPage.clickContinueButton();
 
     accountSelectionPage = new AccountSelectionPage();
-    Assert.assertTrue(accountSelectionPage.isOnAccountSelectionPage(), "User should be redirected to the account selection page after register page");
+    Assert.assertTrue(accountSelectionPage.isPageOpened(), "User should be redirected to the account selection page after register page");
     Assert.assertTrue(accountSelectionPage.isContinueButtonDisplayed(), "Continue button should be visible during account selection page");
     accountSelectionPage.clickContinueButton();
 
     createProfilePage = new CreateProfilePage();
-    Assert.assertTrue(createProfilePage.isOnCreateProfilePage(), "User should be redirected to the create profile page after account selection page");
+    Assert.assertTrue(createProfilePage.isPageOpened(), "User should be redirected to the create profile page after account selection page");
 
     SoftAssert loginSoftAssert = new SoftAssert();
     loginSoftAssert.assertTrue(createProfilePage.isTitleDropdownDisplayed(), "Title dropdown should be visible during create profile page");
@@ -72,13 +72,13 @@ public class RegistrationFlowTest extends BaseTest {
     loginSoftAssert.assertTrue(createProfilePage.isRegisterButtonDisplayed(), "Register button should be visible during create profile page");
     loginSoftAssert.assertAll();
 
-    createProfilePage.selectTitle(SELECT_TITLE);
+    createProfilePage.selectTitle(TITLE_VALUE);
     createProfilePage.enterNameCredentials(newUser);
-    createProfilePage.selectCountryCode(SELECT_COUNTRY_CODE);
+    createProfilePage.selectCountryCode(COUNTRY_CODE_VALUE);
     createProfilePage.enterPhoneNumber(newUser);
     createProfilePage.clickRegisterButton();
 
     homePage = new HomePage();
-    Assert.assertTrue(homePage.isOnHomePage(),  "User should be redirected to the home page after registration");
+    Assert.assertTrue(homePage.isPageOpened(),  "User should be redirected to the home page after registration");
   }
 }

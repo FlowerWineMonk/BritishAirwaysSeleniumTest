@@ -28,6 +28,11 @@ public abstract class BasePage {
     return ConfigLoader.get("BASE_URL");
   }
 
+  public boolean isPageOpened() {
+    String currentUrl = DriverManager.getDriver().getCurrentUrl();
+    return currentUrl.contains(getRelativePath());
+  }
+
   protected WebDriverWait getWait(int seconds) {
     return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
   }

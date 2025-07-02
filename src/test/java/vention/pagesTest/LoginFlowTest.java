@@ -23,7 +23,7 @@ public class LoginFlowTest extends BaseTest {
     preLoginPage = new PreLoginPage();
     preLoginPage.openPage();
 
-    Assert.assertTrue(preLoginPage.isOnPreLoginPage(), "User should be in pre-login page");
+    Assert.assertTrue(preLoginPage.isPageOpened(), "User should be in pre-login page");
 
     cookiePopup = new CookiePopup();
 
@@ -38,7 +38,7 @@ public class LoginFlowTest extends BaseTest {
     preLoginPage.clickLoginButton();
 
     loginPage = new LoginPage();
-    Assert.assertTrue(loginPage.isOnLoginPage(), "User should be redirected to the login page after pre-login page");
+    Assert.assertTrue(loginPage.isPageOpened(), "User should be redirected to the login page after pre-login page");
 
     SoftAssert loginSoftAssert = new SoftAssert();
     loginSoftAssert.assertTrue(loginPage.isEmailInputDisplayed(), "Email input should be visible during login");
@@ -51,6 +51,6 @@ public class LoginFlowTest extends BaseTest {
     loginPage.clickNextButton();
 
     homePage = new HomePage();
-    Assert.assertTrue(homePage.isOnHomePage(), "User should be redirected to the home page after login");
+    Assert.assertTrue(homePage.isPageOpened(), "User should be redirected to the home page after login");
   }
 }

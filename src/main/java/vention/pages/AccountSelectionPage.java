@@ -5,18 +5,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class AccountSelectionPage extends BasePage {
-  private static final String ACCOUNT_SELECTION_URL = "/account-selection";
+  private static final String RELATIVE_PATH = "/account-selection";
 
   @FindBy(id = "remove-family-friend")
   private WebElement continueButton;
 
-  public AccountSelectionPage() {
-    super();
+  @Override
+  public String getRelativePath() {
+    return RELATIVE_PATH;
   }
 
-  public boolean isOnAccountSelectionPage() {
-    String currentUrl = DriverManager.getDriver().getCurrentUrl();
-    return currentUrl.contains(ACCOUNT_SELECTION_URL);
+  public AccountSelectionPage() {
+    super();
   }
 
   public void clickContinueButton() {

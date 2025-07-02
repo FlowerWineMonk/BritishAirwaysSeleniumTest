@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import vention.entity.User;
 
 public class LoginPage extends BasePage {
-  private static final String LOGIN_URL = "/login";
+  private static final String RELATIVE_PATH = "/login";
 
   @FindBy(id = "username")
   private WebElement emailInput;
@@ -19,11 +19,6 @@ public class LoginPage extends BasePage {
 
   public LoginPage() {
     super();
-  }
-
-  public boolean isOnLoginPage() {
-    String currentUrl = DriverManager.getDriver().getCurrentUrl();
-    return currentUrl.contains(LOGIN_URL);
   }
 
   public void enterLoginCredentials(User user) {

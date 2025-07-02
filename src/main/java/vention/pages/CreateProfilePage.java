@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import vention.entity.User;
 
 public class CreateProfilePage extends BasePage {
-  private static final String CREATE_PROFILE_URL = "/register";
+  private static final String RELATIVE_PATH = "/register";
 
   @FindBy(id = "title")
   private WebElement titleDropdown;
@@ -27,13 +27,13 @@ public class CreateProfilePage extends BasePage {
   @FindBy(xpath = "//button[@data-testid='register-submit-button']")
   private WebElement registerButton;
 
-  public CreateProfilePage() {
-    super();
+  @Override
+  public String getRelativePath() {
+    return RELATIVE_PATH;
   }
 
-  public boolean isOnCreateProfilePage() {
-    String currentUrl = DriverManager.getDriver().getCurrentUrl();
-    return currentUrl.contains(CREATE_PROFILE_URL);
+  public CreateProfilePage() {
+    super();
   }
 
   public void selectTitle(String titleValue) {
