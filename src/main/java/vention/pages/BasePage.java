@@ -2,6 +2,7 @@ package vention.pages;
 
 import vention.configLoader.ConfigLoader;
 import vention.driver.DriverManager;
+import vention.entity.User;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -73,5 +74,10 @@ public abstract class BasePage {
   protected void waitForVisibilityAndSendKeys(WebElement element, String text, int seconds) {
     waitForVisibility(element, seconds);
     element.sendKeys(text);
+  }
+
+  protected void enterEmailAndPassword(WebElement emailInput, WebElement passwordInput, User user) {
+    waitForVisibilityAndSendKeys(emailInput, user.getEmail());
+    waitForVisibilityAndSendKeys(passwordInput, user.getPassword());
   }
 }

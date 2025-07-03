@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CookiePopup extends BasePage {
-  @FindBy(xpath = "//button[@id = 'ensCloseBanner']")
+  @FindBy(id = "ensCloseBanner")
   private WebElement rejectAllButton;
 
   public CookiePopup() {

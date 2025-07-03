@@ -22,8 +22,7 @@ public class LoginPage extends BasePage {
   }
 
   public void enterLoginCredentials(User user) {
-    waitForVisibilityAndSendKeys(emailInput, user.getEmail());
-    waitForVisibilityAndSendKeys(passwordInput, user.getPassword());
+    enterEmailAndPassword(emailInput, passwordInput, user);   
   }
 
   public void clickNextButton() {

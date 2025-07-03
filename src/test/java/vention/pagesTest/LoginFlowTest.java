@@ -26,7 +26,6 @@ public class LoginFlowTest extends BaseTest {
     Assert.assertTrue(preLoginPage.isPageOpened(), "User should be in pre-login page");
 
     cookiePopup = new CookiePopup();
-
     if (cookiePopup.isRejectAllButtonDisplayed()) {
       cookiePopup.clickRejectAllButton();
     }

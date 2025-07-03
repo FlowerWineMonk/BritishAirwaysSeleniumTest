@@ -27,8 +27,7 @@ public class RegisterPage extends BasePage {
   }
 
   public void enterRegisterCredentials(User user) {
-    waitForVisibilityAndSendKeys(emailInput, user.getEmail());
-    waitForVisibilityAndSendKeys(passwordInput, user.getPassword());
+    enterEmailAndPassword(emailInput, passwordInput, user);
   }
 
   public void clickContinueButton() {

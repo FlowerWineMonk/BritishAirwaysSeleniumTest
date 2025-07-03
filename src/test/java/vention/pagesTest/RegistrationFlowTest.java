@@ -14,9 +14,6 @@ import org.testng.asserts.SoftAssert;
 import org.testng.Assert;
 
 public class RegistrationFlowTest extends BaseTest {
-  private static final String TITLE_VALUE = "Mr";
-  private static final String COUNTRY_CODE_VALUE = "+1";
-
   private CookiePopup cookiePopup;
   private PreLoginPage preLoginPage;
   private RegisterPage registerPage;
@@ -32,7 +29,6 @@ public class RegistrationFlowTest extends BaseTest {
     Assert.assertTrue(preLoginPage.isPageOpened(), "User should be in pre-login page");
 
     cookiePopup = new CookiePopup();
-
     if (cookiePopup.isRejectAllButtonDisplayed()) {
       cookiePopup.clickRejectAllButton();
     }
