@@ -1,16 +1,15 @@
 package vention.entity;
 
 import com.github.javafaker.Faker;
-import io.github.cdimascio.dotenv.Dotenv;
+
 
 public class UserFactory {
   private static final Faker faker = new Faker();
 
   public static User getExistingUser() {
-    Dotenv dotenv = Dotenv.load();
     return User.builder()
-            .email(dotenv.get("EXISTING_USER_EMAIL"))
-            .password(dotenv.get("EXISTING_USER_PASSWORD")).build();
+            .email("abc123ABC@gmail.com")
+            .password("abc123ABC").build();
   }
 
   public static User getRandomUser() {

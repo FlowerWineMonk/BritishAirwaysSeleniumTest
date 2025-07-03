@@ -14,7 +14,6 @@
     <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
     <java.faker.version>1.0.2</java.faker.version>
     <lombok.version>1.18.38</lombok.version>
-    <cdimascio.version>5.2.2</cdimascio.version>
   </properties>
 
   <dependencies>
@@ -41,12 +40,6 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>io.github.cdimascio</groupId>
-      <artifactId>java-dotenv</artifactId>
-      <version>${cdimascio.version}</version>
     </dependency>
   </dependencies>
 
