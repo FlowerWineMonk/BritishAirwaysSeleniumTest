@@ -1,17 +1,16 @@
 package vention.pages;
 
-import vention.driver.DriverManager;
-import org.openqa.selenium.WebElement;
+import vention.WebElementImp.CustomElement;
 import org.openqa.selenium.support.FindBy;
 
 public class PreLoginPage extends BasePage {
   private static final String RELATIVE_PATH = "/nx/b/account/en/usa/account/pre-login";
 
   @FindBy(xpath = "//button[@data-testid='login-button']")
-  private WebElement loginButton;
+  private CustomElement loginButton;
 
   @FindBy(xpath = "//button[@data-testid='register-button']")
-  private WebElement registerButton;
+  private CustomElement registerButton;
 
   @Override
   public String getRelativePath() {
@@ -23,11 +22,11 @@ public class PreLoginPage extends BasePage {
   }
 
   public void clickLoginButton() {
-    waitForClickableAndClick(loginButton, 15);
+    loginButton.click(15);
   }
 
   public void clickRegisterButton() {
-    waitForClickableAndClick(registerButton, 15);
+    registerButton.click(15);
   }
 
   public boolean isLoginButtonDisplayed() {

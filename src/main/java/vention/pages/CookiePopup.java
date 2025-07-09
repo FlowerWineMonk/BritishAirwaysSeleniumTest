@@ -1,18 +1,18 @@
 package vention.pages;
 
-import org.openqa.selenium.WebElement;
+import vention.WebElementImp.CustomElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CookiePopup extends BasePage {
   @FindBy(id = "ensCloseBanner")
-  private WebElement rejectAllButton;
+  private CustomElement rejectAllButton;
 
   public CookiePopup() {
     super();
   }
  
   public void clickRejectAllButton() {
-    waitForClickableAndClick(rejectAllButton);
+    rejectAllButton.click();
   }
 
   public boolean isRejectAllButtonDisplayed() {
