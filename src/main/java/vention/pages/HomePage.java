@@ -1,6 +1,6 @@
 package vention.pages;
 
-import vention.WebElementImp.CustomElement;
+import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 
@@ -8,22 +8,22 @@ public class HomePage extends BasePage {
   private static final String RELATIVE_PATH = "/travel/home/public/en_us/";
 
   @FindBy(id = "fare")
-  private CustomElement fareDropDown;
+  private WebElementImp fareDropDown;
 
   @FindBy(id = "from")
-  private CustomElement fromInput;
+  private WebElementImp fromInput;
 
   @FindBy(id = "to")
-  private CustomElement toInput;
+  private WebElementImp toInput;
 
   @FindBy(id = "departureDate")
-  private CustomElement departureDateButton;
+  private WebElementImp departureDateButton;
 
   @FindBy(id = "flight-search-tab-inputs-flights-button-find-flights")
-  private CustomElement findFlightsButton;
+  private WebElementImp findFlightsButton;
 
   @FindBy(xpath = "//button[@data-testid='amex-offer-hero-variant-cta-button']")
-  private CustomElement learnMoreButton;
+  private WebElementImp learnMoreButton;
 
   public HomePage() {
     super();
@@ -36,22 +36,22 @@ public class HomePage extends BasePage {
 
   public void selectFare(String fareWay) {
     fareDropDown.click();
-    CustomElement.clickByLocator(By.xpath("//option[@value='" + fareWay + "']"), 10);
+    WebElementImp.clickByLocator(By.xpath("//option[@value='" + fareWay + "']"), 10);
   }
 
   public void enterFromDestination(String fromCity, String fromCityInfo) {
     fromInput.sendKeys(fromCity);
-    CustomElement.clickByLocator(By.id(fromCityInfo), 30);
+    WebElementImp.clickByLocator(By.id(fromCityInfo), 30);
   }
 
   public void enterToDestination(String toCity, String toCityInfo) {
     toInput.sendKeys(toCity);
-    CustomElement.clickByLocator(By.id(toCityInfo), 30);
+    WebElementImp.clickByLocator(By.id(toCityInfo), 30);
   }
 
   public void selectDepartureDate(String date) {
     departureDateButton.click();
-    CustomElement.clickByLocator(By.xpath("//span[@data-testid='" + date + "']"), 20);
+    WebElementImp.clickByLocator(By.xpath("//span[@data-testid='" + date + "']"), 20);
   }
 
   public void clickFindFlightsButton() {

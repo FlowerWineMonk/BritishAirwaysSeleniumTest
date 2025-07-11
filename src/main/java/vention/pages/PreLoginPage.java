@@ -1,16 +1,16 @@
 package vention.pages;
 
-import vention.WebElementImp.CustomElement;
+import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 
 public class PreLoginPage extends BasePage {
   private static final String RELATIVE_PATH = "/nx/b/account/en/usa/account/pre-login";
 
   @FindBy(xpath = "//button[@data-testid='login-button']")
-  private CustomElement loginButton;
+  private WebElementImp loginButton;
 
   @FindBy(xpath = "//button[@data-testid='register-button']")
-  private CustomElement registerButton;
+  private WebElementImp registerButton;
 
   @Override
   public String getRelativePath() {

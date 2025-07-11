@@ -1,13 +1,13 @@
 package vention.pages;
 
-import vention.WebElementImp.CustomElement;
+import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 
 public class AccountSelectionPage extends BasePage {
   private static final String RELATIVE_PATH = "/account-selection";
 
   @FindBy(id = "remove-family-friend")
-  private CustomElement continueButton;
+  private WebElementImp continueButton;
 
   @Override
   public String getRelativePath() {

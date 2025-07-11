@@ -3,8 +3,8 @@ package vention.pages;
 import vention.configLoader.ConfigLoader;
 import vention.driver.DriverManager;
 import vention.entity.User;
-import vention.WebElementImp.CustomElement;
-import vention.WebElementImp.CustomFieldDecorator;
+import vention.customWebElement.WebElementImp;
+import vention.customWebElement.CustomFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
 public abstract class BasePage {
@@ -29,7 +29,7 @@ public abstract class BasePage {
     return currentUrl.contains(getRelativePath());
   }
 
-  protected void enterEmailAndPassword(CustomElement emailInput, CustomElement passwordInput, User user) {
+  protected void enterEmailAndPassword(WebElementImp emailInput, WebElementImp passwordInput, User user) {
     emailInput.sendKeys(user.getEmail());
     passwordInput.sendKeys(user.getPassword());
   }

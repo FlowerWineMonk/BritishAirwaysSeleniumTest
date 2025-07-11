@@ -1,6 +1,6 @@
 package vention.pages;
 
-import vention.WebElementImp.CustomElement;
+import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 import vention.entity.User;
@@ -9,22 +9,22 @@ public class CreateProfilePage extends BasePage {
   private static final String RELATIVE_PATH = "/register";
 
   @FindBy(id = "title")
-  private CustomElement titleDropdown;
+  private WebElementImp titleDropdown;
 
   @FindBy(id = "firstname--inputtext--input")
-  private CustomElement firstNameInput;
+  private WebElementImp firstNameInput;
 
   @FindBy(id = "lastname--inputtext--input")
-  private CustomElement lastNameInput;
+  private WebElementImp lastNameInput;
 
   @FindBy(id = "countrycode")
-  private CustomElement countryCodeDropdown;
+  private WebElementImp countryCodeDropdown;
 
   @FindBy(id = "phoneNumber--inputtext--input")
-  private CustomElement phoneNumberInput;
+  private WebElementImp phoneNumberInput;
 
   @FindBy(xpath = "//button[@data-testid='register-submit-button']")
-  private CustomElement registerButton;
+  private WebElementImp registerButton;
 
   @Override
   public String getRelativePath() {
@@ -37,7 +37,7 @@ public class CreateProfilePage extends BasePage {
 
   public void selectTitle(String titleValue) {
     titleDropdown.click();
-    CustomElement.clickByLocator(By.xpath("//option[@value='" + titleValue + "']"), 15);
+    WebElementImp.clickByLocator(By.xpath("//option[@value='" + titleValue + "']"), 15);
   }
 
   public void enterNameCredentials(User user) {
@@ -47,7 +47,7 @@ public class CreateProfilePage extends BasePage {
 
   public void selectCountryCode(String code) {
     countryCodeDropdown.click();
-    CustomElement.clickByLocator(By.xpath("//option[@value='" + code + "']"), 15);
+    WebElementImp.clickByLocator(By.xpath("//option[@value='" + code + "']"), 15);
   }
 
   public void enterPhoneNumber(User user) {

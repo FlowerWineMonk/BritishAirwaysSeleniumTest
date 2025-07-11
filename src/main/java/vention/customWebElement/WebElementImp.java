@@ -1,4 +1,4 @@
-package vention.WebElementImp;
+package vention.customWebElement;
 
 import vention.driver.DriverManager;
 import org.openqa.selenium.WebElement;
@@ -7,17 +7,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
 import java.time.Duration;
 
-public class CustomElement implements BaseElement {
+public class WebElementImp implements BaseElement {
   private final WebElement element;
   private final By locator;
   private static final int DEFAULT_TIME = 10;
 
-  public CustomElement(WebElement element) {
+  public WebElementImp(WebElement element) {
     this.element = element;
     this.locator = null;
   }
 
-  public CustomElement(By locator) {
+  public WebElementImp(By locator) {
     this.element = null;
     this.locator = locator;
   }

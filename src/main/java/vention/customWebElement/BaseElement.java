@@ -1,4 +1,4 @@
-package vention.WebElementImp;
+package vention.customWebElement;
 
 public interface BaseElement {
   void click();

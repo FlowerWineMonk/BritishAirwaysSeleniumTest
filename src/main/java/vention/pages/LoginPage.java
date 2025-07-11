@@ -1,6 +1,6 @@
 package vention.pages;
 
-import vention.WebElementImp.CustomElement;
+import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 import vention.entity.User;
 
@@ -8,13 +8,13 @@ public class LoginPage extends BasePage {
   private static final String RELATIVE_PATH = "/login";
 
   @FindBy(id = "username")
-  private CustomElement emailInput;
+  private WebElementImp emailInput;
 
   @FindBy(id = "password")
-  private CustomElement passwordInput;
+  private WebElementImp passwordInput;
 
   @FindBy(xpath = "//button[@name='action']")
-  private CustomElement nextButton;
+  private WebElementImp nextButton;
 
   public LoginPage() {
     super();
