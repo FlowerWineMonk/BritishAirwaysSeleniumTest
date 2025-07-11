@@ -1,7 +1,5 @@
 package vention.pagesTest;
 
-import vention.pagesTest.PreLoginPageTest;
-import vention.pagesTest.LoginPageTest;
 import vention.pages.HomePage;
 import org.testng.annotations.Test;
 import org.testng.Assert;

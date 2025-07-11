@@ -1,7 +1,6 @@
 package vention.pages;
 
-import vention.driver.DriverManager;
-import org.openqa.selenium.WebElement;
+import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 
@@ -9,22 +8,22 @@ public class HomePage extends BasePage {
   private static final String RELATIVE_PATH = "/travel/home/public/en_us/";
 
   @FindBy(id = "fare")
-  private WebElement fareDropDown;
+  private WebElementImp fareDropDown;
 
   @FindBy(id = "from")
-  private WebElement fromInput;
+  private WebElementImp fromInput;
 
   @FindBy(id = "to")
-  private WebElement toInput;
+  private WebElementImp toInput;
 
   @FindBy(id = "departureDate")
-  private WebElement departureDateButton;
+  private WebElementImp departureDateButton;
 
   @FindBy(id = "flight-search-tab-inputs-flights-button-find-flights")
-  private WebElement findFlightsButton;
+  private WebElementImp findFlightsButton;
 
   @FindBy(xpath = "//button[@data-testid='amex-offer-hero-variant-cta-button']")
-  private WebElement learnMoreButton;
+  private WebElementImp learnMoreButton;
 
   public HomePage() {
     super();
@@ -36,31 +35,31 @@ public class HomePage extends BasePage {
   }
 
   public void selectFare(String fareWay) {
-    waitForClickableAndClick(fareDropDown);
-    waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + fareWay + "']"), 10);
+    fareDropDown.click();
+    WebElementImp.clickByLocator(By.xpath("//option[@value='" + fareWay + "']"), 10);
   }
 
   public void enterFromDestination(String fromCity, String fromCityInfo) {
-    waitForVisibilityAndSendKeys(fromInput, fromCity);
-    waitForVisibilityAndClickByLocator(By.id(fromCityInfo), 30);
+    fromInput.sendKeys(fromCity);
+    WebElementImp.clickByLocator(By.id(fromCityInfo), 30);
   }
 
   public void enterToDestination(String toCity, String toCityInfo) {
-    waitForVisibilityAndSendKeys(toInput, toCity);
-    waitForVisibilityAndClickByLocator(By.id(toCityInfo), 30);
+    toInput.sendKeys(toCity);
+    WebElementImp.clickByLocator(By.id(toCityInfo), 30);
   }
 
   public void selectDepartureDate(String date) {
-    waitForClickableAndClick(departureDateButton);
-    waitForVisibilityAndClickByLocator(By.xpath("//span[@data-testid='" + date + "']"), 20);
+    departureDateButton.click();
+    WebElementImp.clickByLocator(By.xpath("//span[@data-testid='" + date + "']"), 20);
   }
 
   public void clickFindFlightsButton() {
-    waitForClickableAndClick(findFlightsButton);
+    findFlightsButton.click();
   }
 
   public void clickLearnMoreButton() {
-    waitForClickableAndClick(learnMoreButton);
+    learnMoreButton.click();
   }
 
   public boolean isSelectFareDisplayed() {

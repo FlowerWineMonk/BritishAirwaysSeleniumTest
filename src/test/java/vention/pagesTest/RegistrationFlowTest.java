@@ -1,12 +1,7 @@
 package vention.pagesTest;
 
-import vention.pagesTest.PreLoginPageTest;
-import vention.pagesTest.RegisterPageTest;
-import vention.pagesTest.AccountSelectionPageTest;
-import vention.pagesTest.CreateProfilePageTest;
 import vention.pages.HomePage;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import org.testng.Assert;
 
 public class RegistrationFlowTest extends BaseTest {

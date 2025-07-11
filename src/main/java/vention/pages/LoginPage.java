@@ -1,7 +1,6 @@
 package vention.pages;
 
-import vention.driver.DriverManager;
-import org.openqa.selenium.WebElement;
+import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 import vention.entity.User;
 
@@ -9,13 +8,13 @@ public class LoginPage extends BasePage {
   private static final String RELATIVE_PATH = "/login";
 
   @FindBy(id = "username")
-  private WebElement emailInput;
+  private WebElementImp emailInput;
 
   @FindBy(id = "password")
-  private WebElement passwordInput;
+  private WebElementImp passwordInput;
 
   @FindBy(xpath = "//button[@name='action']")
-  private WebElement nextButton;
+  private WebElementImp nextButton;
 
   public LoginPage() {
     super();
@@ -26,7 +25,7 @@ public class LoginPage extends BasePage {
   }
 
   public void clickNextButton() {
-    waitForClickableAndClick(nextButton);
+    nextButton.click();
   }
 
   public boolean isEmailInputDisplayed() {
