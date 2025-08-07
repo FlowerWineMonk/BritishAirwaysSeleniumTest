@@ -2,7 +2,6 @@ package vention.entity;
 
 import com.github.javafaker.Faker;
 
-
 public class UserFactory {
   private static final Faker faker = new Faker();
 

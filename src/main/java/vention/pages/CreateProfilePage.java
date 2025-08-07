@@ -1,7 +1,6 @@
 package vention.pages;
 
-import vention.driver.DriverManager;
-import org.openqa.selenium.WebElement;
+import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 import vention.entity.User;
@@ -10,22 +9,22 @@ public class CreateProfilePage extends BasePage {
   private static final String RELATIVE_PATH = "/register";
 
   @FindBy(id = "title")
-  private WebElement titleDropdown;
+  private WebElementImp titleDropdown;
 
   @FindBy(id = "firstname--inputtext--input")
-  private WebElement firstNameInput;
+  private WebElementImp firstNameInput;
 
   @FindBy(id = "lastname--inputtext--input")
-  private WebElement lastNameInput;
+  private WebElementImp lastNameInput;
 
   @FindBy(id = "countrycode")
-  private WebElement countryCodeDropdown;
+  private WebElementImp countryCodeDropdown;
 
   @FindBy(id = "phoneNumber--inputtext--input")
-  private WebElement phoneNumberInput;
+  private WebElementImp phoneNumberInput;
 
   @FindBy(xpath = "//button[@data-testid='register-submit-button']")
-  private WebElement registerButton;
+  private WebElementImp registerButton;
 
   @Override
   public String getRelativePath() {
@@ -37,26 +36,26 @@ public class CreateProfilePage extends BasePage {
   }
 
   public void selectTitle(String titleValue) {
-    waitForClickableAndClick(titleDropdown);
-    waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + titleValue + "']"), 15);
+    titleDropdown.click();
+    WebElementImp.clickByLocator(By.xpath("//option[@value='" + titleValue + "']"), 15);
   }
 
   public void enterNameCredentials(User user) {
-    waitForVisibilityAndSendKeys(firstNameInput, user.getFirstName());
-    waitForVisibilityAndSendKeys(lastNameInput, user.getLastName());
+    firstNameInput.sendKeys(user.getFirstName());
+    lastNameInput.sendKeys(user.getLastName());
   }
 
   public void selectCountryCode(String code) {
-    waitForClickableAndClick(countryCodeDropdown);
-    waitForVisibilityAndClickByLocator(By.xpath("//option[@value='" + code + "']"), 15);
+    countryCodeDropdown.click();
+    WebElementImp.clickByLocator(By.xpath("//option[@value='" + code + "']"), 15);
   }
 
   public void enterPhoneNumber(User user) {
-    waitForVisibilityAndSendKeys(phoneNumberInput, user.getPhone());
+    phoneNumberInput.sendKeys(user.getPhone());
   }
 
   public void clickRegisterButton() {
-    waitForClickableAndClick(registerButton);
+    registerButton.click();;
   }
 
   public boolean isTitleDropdownDisplayed() {

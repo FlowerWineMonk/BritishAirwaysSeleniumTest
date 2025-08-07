@@ -1,7 +1,6 @@
 package vention.pages;
 
-import vention.driver.DriverManager;
-import org.openqa.selenium.WebElement;
+import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 import vention.entity.User;
 
@@ -9,13 +8,13 @@ public class RegisterPage extends BasePage {
   private static final String RELATIVE_PATH = "/email-validation";
 
   @FindBy(id = "emailInput--inputtext--input")
-  private WebElement emailInput;
+  private WebElementImp emailInput;
 
   @FindBy(id = "passwordInput--inputtext--input")
-  private WebElement passwordInput;
+  private WebElementImp passwordInput;
 
   @FindBy(xpath = "//button[@data-testid='validation-submit-button']")
-  private WebElement continueButton;
+  private WebElementImp continueButton;
 
   @Override
   public String getRelativePath() {
@@ -31,7 +30,7 @@ public class RegisterPage extends BasePage {
   }
 
   public void clickContinueButton() {
-    waitForClickableAndClick(continueButton);
+    continueButton.click();
   }
 
   public boolean isEmailInputDisplayed() {
