@@ -1,36 +1,16 @@
 package vention.pagesTest;
 
-import vention.driver.DriverManager;
-import vention.pages.CookiePopup;
-import vention.pages.HomePage;
-import vention.enums.Cities;
-
-import org.testng.annotations.BeforeMethod;
+import vention.steps.BookingSteps;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import org.testng.Assert;
 
 public class BookFlowTest extends BaseTest {
-  private CookiePopup cookiePopup;
-  private HomePage homePage;
+  private final BookingSteps bookingSteps = new BookingSteps();
 
   @Test
   public void testBookFlight() {
-    homePage = new HomePage();
-    homePage.openPage();
-
-    cookiePopup = new CookiePopup();
-    if (cookiePopup.isRejectAllButtonDisplayed()) {
-      cookiePopup.clickRejectAllButton();
-    }
-
-    homePage.selectFare(FARE_TYPE_ONE_WAY);
-    homePage.enterFromDestination(Cities.NEW_YORK.getCityName(), Cities.NEW_YORK.getCityAirport());
-    homePage.enterToDestination(Cities.LONDON.getCityName(), Cities.LONDON.getCityAirport());
-    homePage.selectDepartureDate(DEPARTURE_DATE);
-    homePage.clickFindFlightsButton();
-
-    final String currentUrl = DriverManager.getDriver().getCurrentUrl();
-    Assert.assertTrue(currentUrl.contains(OUTBOUND_URL), "User should be redirected to outbound page after booking a flight");
+    bookingSteps.bookOneWayFlight(FARE_TYPE_ONE_WAY, DEPARTURE_DATE);
+    Assert.assertTrue(bookingSteps.isUserRedirectedToOutboundPage(OUTBOUND_URL),
+        "User should be redirected to outbound page after booking a flight");
   }
 }

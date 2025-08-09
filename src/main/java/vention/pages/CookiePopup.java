@@ -10,7 +10,7 @@ public class CookiePopup extends BasePage {
   public CookiePopup() {
     super();
   }
- 
+
   public void clickRejectAllButton() {
     rejectAllButton.click();
   }

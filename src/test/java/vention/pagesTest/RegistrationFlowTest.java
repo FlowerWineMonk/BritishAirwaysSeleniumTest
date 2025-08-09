@@ -1,31 +1,18 @@
 package vention.pagesTest;
 
 import vention.pages.HomePage;
+import vention.steps.RegistrationSteps;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
 public class RegistrationFlowTest extends BaseTest {
-  private PreLoginPageTest preLoginPageTest;
-  private RegisterPageTest registerPageTest;
-  private AccountSelectionPageTest accountSelectionPageTest;
-  private CreateProfilePageTest createProfilePageTest;
-  private HomePage homePage;
+  private final RegistrationSteps registrationSteps = new RegistrationSteps();
 
   @Test
   public void testCompleteUserRegistrationFlowWithProfileCreation() {
-    preLoginPageTest = new PreLoginPageTest();
-    preLoginPageTest.clickRegisterButtonTest();
+    registrationSteps.registerNewUserFlow();
 
-    registerPageTest = new RegisterPageTest();
-    registerPageTest.enterRegisterCredentialsTest();
-
-    accountSelectionPageTest = new AccountSelectionPageTest();
-    accountSelectionPageTest.clickContinueButtonTest();
-
-    createProfilePageTest = new CreateProfilePageTest();
-    createProfilePageTest.enterProfileCredentialsTest();
-
-    homePage = new HomePage();
+    HomePage homePage = new HomePage();
     Assert.assertTrue(homePage.isPageOpened(), "User should be redirected to the home page after profile creation");
   }
 }

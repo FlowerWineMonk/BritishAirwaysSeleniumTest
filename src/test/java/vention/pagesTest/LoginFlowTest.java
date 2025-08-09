@@ -1,23 +1,18 @@
 package vention.pagesTest;
 
 import vention.pages.HomePage;
+import vention.steps.LoginSteps;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
 public class LoginFlowTest extends BaseTest {
-  private PreLoginPageTest preLoginPageTest;
-  private LoginPageTest loginPageTest;
-  private HomePage homePage;
+  private final LoginSteps loginSteps = new LoginSteps();
 
   @Test
   public void testCompleteUserLoginFlow() {
-    preLoginPageTest = new PreLoginPageTest();
-    preLoginPageTest.clickLoginButtonTest();
+    loginSteps.loginWithExistingUser();
 
-    loginPageTest = new LoginPageTest();
-    loginPageTest.enterLoginCredentials();
-
-    homePage = new HomePage();
+    HomePage homePage = new HomePage();
     Assert.assertTrue(homePage.isPageOpened(), "User should be redirected to the home page after login");
   }
 }
