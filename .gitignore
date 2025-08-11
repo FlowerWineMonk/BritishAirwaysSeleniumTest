@@ -3,3 +3,10 @@ config/
 notes.txt
 .idea/
 /allure-results
+
+# Eclipse related
+.settings/
+.classpath
+.factorypath
+.project
+.settings

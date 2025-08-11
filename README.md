@@ -21,7 +21,6 @@ This project contains automated UI tests for the British Airways web application
    ```
 
 2. **Install Dependencies**
-
    - Make sure you have Java and Maven installed.
    - Install all required dependencies:
 
@@ -30,11 +29,9 @@ This project contains automated UI tests for the British Airways web application
      ```
 
 3. **Configure Test Parameters**
-
    - Make sure to create a configurations (if needed) in `src/test/resources/application.properties` (BASE_URL).
 
 4. **Run the Tests**
-
    - To execute all tests, use:
 
      ```bash
