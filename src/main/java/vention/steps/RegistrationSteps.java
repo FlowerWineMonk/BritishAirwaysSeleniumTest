@@ -2,10 +2,11 @@ package vention.steps;
 
 import vention.pages.*;
 import vention.entity.User;
-import vention.entity.UserFactory;
+import io.qameta.allure.Step;
 
 public class RegistrationSteps {
-  public void registerNewUserFlow() {
+  @Step("Register new user {user.email} with title '{title}' and country code '{countryCode}'")
+  public void registerNewUserFlow(User user, String title, String countryCode) {
     PreLoginPage preLoginPage = new PreLoginPage();
     preLoginPage.openPage();
 
@@ -17,21 +18,21 @@ public class RegistrationSteps {
     preLoginPage.clickRegisterButton();
 
     RegisterPage registerPage = new RegisterPage();
-    User newUser = UserFactory.getRandomUser();
-    registerPage.enterRegisterCredentials(newUser);
+    registerPage.enterRegisterCredentials(user);
     registerPage.clickContinueButton();
 
     AccountSelectionPage accountSelectionPage = new AccountSelectionPage();
     accountSelectionPage.clickContinueButton();
 
     CreateProfilePage createProfilePage = new CreateProfilePage();
-    createProfilePage.selectTitle("Mr");
-    createProfilePage.enterNameCredentials(newUser);
-    createProfilePage.selectCountryCode("+1");
-    createProfilePage.enterPhoneNumber(newUser);
+    createProfilePage.selectTitle(title);
+    createProfilePage.enterNameCredentials(user);
+    createProfilePage.selectCountryCode(countryCode);
+    createProfilePage.enterPhoneNumber(user);
     createProfilePage.clickRegisterButton();
   }
 
+  @Step("Verify home page is visible after registration")
   public boolean isHomePageVisibleAfterRegistration() {
     HomePage homePage = new HomePage();
     return homePage.isPageOpened();

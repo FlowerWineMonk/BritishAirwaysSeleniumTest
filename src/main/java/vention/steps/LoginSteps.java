@@ -1,11 +1,12 @@
 package vention.steps;
 
 import vention.entity.User;
-import vention.entity.UserFactory;
 import vention.pages.*;
+import io.qameta.allure.Step;
 
 public class LoginSteps {
-  public void loginWithExistingUser() {
+  @Step("Login with user: {user.email}}")
+  public void loginWithExistingUser(User user) {
     PreLoginPage preLoginPage = new PreLoginPage();
     preLoginPage.openPage();
 
@@ -17,12 +18,12 @@ public class LoginSteps {
     preLoginPage.clickLoginButton();
 
     LoginPage loginPage = new LoginPage();
-    User existingUser = UserFactory.getExistingUser();
-    loginPage.enterLoginCredentials(existingUser);
+    loginPage.enterLoginCredentials(user);
     loginPage.clickNextButton();
   }
 
-  public boolean isHomePageVisibleAfterRegistration() {
+  @Step("Verify home page is visible after login")
+  public boolean isHomePageVisibleAfterLogin() {
     HomePage homePage = new HomePage();
     return homePage.isPageOpened();
   }

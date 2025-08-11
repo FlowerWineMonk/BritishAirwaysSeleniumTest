@@ -2,6 +2,7 @@ package vention.pagesTest;
 
 import vention.driver.DriverFactory;
 import vention.driver.DriverManager;
+import vention.entity.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -12,9 +13,14 @@ public class BaseTest {
   protected static final String TITLE_VALUE = "Mr";
   protected static final String COUNTRY_CODE_VALUE = "+1";
 
+  protected User existingUser;
+  protected User newUser;
+
   @BeforeClass
   public void beforeClass() {
-    DriverManager.setDriver(DriverFactory.createLocalDriver(DriverFactory.BrowserType.FIREFOX));
+    DriverManager.setDriver(DriverFactory.createLocalDriver(DriverFactory.BrowserType.CHROME));
+    existingUser = UserFactory.getExistingUser();
+    newUser = UserFactory.getRandomUser();
   }
 
   @AfterClass

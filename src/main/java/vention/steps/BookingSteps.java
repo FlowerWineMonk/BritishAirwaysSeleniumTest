@@ -3,10 +3,12 @@ package vention.steps;
 import vention.driver.DriverManager;
 import vention.pages.CookiePopup;
 import vention.pages.HomePage;
-import vention.enums.Cities;
+import io.qameta.allure.Step;
 
 public class BookingSteps {
-  public void bookOneWayFlight(String fareType, String departureDate) {
+  @Step("Book one-way flight from {fromCity} ({fromAirport}) to {toCity} ({toAirport}) on {departureDate} with fare type {fareType}")
+  public void bookOneWayFlight(String fareType, String fromCity, String fromAirport, String toCity, String toAirport,
+      String departureDate) {
     HomePage homePage = new HomePage();
     homePage.openPage();
 
@@ -16,12 +18,13 @@ public class BookingSteps {
     }
 
     homePage.selectFare(fareType);
-    homePage.enterFromDestination(Cities.NEW_YORK.getCityName(), Cities.NEW_YORK.getCityAirport());
-    homePage.enterToDestination(Cities.LONDON.getCityName(), Cities.LONDON.getCityAirport());
+    homePage.enterFromDestination(fromCity, fromAirport);
+    homePage.enterToDestination(toCity, toAirport);
     homePage.selectDepartureDate(departureDate);
     homePage.clickFindFlightsButton();
   }
 
+  @Step("Verify user is redirected to outbound page containing: {outboundUrl}}")
   public boolean isUserRedirectedToOutboundPage(String outboundUrl) {
     return DriverManager.getDriver().getCurrentUrl().contains(outboundUrl);
   }
