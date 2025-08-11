@@ -24,12 +24,12 @@ public class PreLoginPage extends BasePage {
 
   @Step("Click login button")
   public void clickLoginButton() {
-    loginButton.click(15);
+    loginButton.click(30);
   }
 
   @Step("Click register button")
   public void clickRegisterButton() {
-    registerButton.click(15);
+    registerButton.click(30);
   }
 
   public boolean isLoginButtonDisplayed() {

@@ -7,9 +7,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
-  protected static final String OUTBOUND_URL = "/book";
+  protected static final String OUTBOUND_URL = "/airselect";
   protected static final String FARE_TYPE_ONE_WAY = "oneWay";
-  protected static final String DEPARTURE_DATE = "calendar-day-31/08/2025";
+  protected static final String DEPARTURE_DATE = "calendar-day-30/09/2025";
   protected static final String TITLE_VALUE = "Mr";
   protected static final String COUNTRY_CODE_VALUE = "+1";
 
@@ -18,7 +18,7 @@ public class BaseTest {
 
   @BeforeClass
   public void beforeClass() {
-    DriverManager.setDriver(DriverFactory.createLocalDriver(DriverFactory.BrowserType.CHROME));
+    DriverManager.setDriver(DriverFactory.createLocalDriver(DriverFactory.BrowserType.FIREFOX));
     existingUser = UserFactory.getExistingUser();
     newUser = UserFactory.getRandomUser();
   }

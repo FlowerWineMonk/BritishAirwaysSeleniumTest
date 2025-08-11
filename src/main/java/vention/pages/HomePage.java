@@ -38,7 +38,7 @@ public class HomePage extends BasePage {
   @Step("Select fare type")
   public void selectFare(String fareWay) {
     fareDropDown.click();
-    WebElementImp.clickByLocator(By.xpath("//option[@value='" + fareWay + "']"), 10);
+    WebElementImp.clickByLocator(By.xpath("//option[@value='" + fareWay + "']"), 15);
   }
 
   @Step("Enter departure city and airport")

@@ -24,7 +24,7 @@ public class BookingSteps {
     homePage.clickFindFlightsButton();
   }
 
-  @Step("Verify user is redirected to outbound page containing: {outboundUrl}}")
+  @Step("Verify user is redirected to outbound page containing: {outboundUrl}")
   public boolean isUserRedirectedToOutboundPage(String outboundUrl) {
     return DriverManager.getDriver().getCurrentUrl().contains(outboundUrl);
   }

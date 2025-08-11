@@ -10,7 +10,7 @@ import java.time.Duration;
 public class WebElementImp implements BaseElement {
   private final WebElement element;
   private final By locator;
-  private static final int DEFAULT_TIME = 20;
+  private static final int DEFAULT_TIME = 10;
 
   public WebElementImp(WebElement element) {
     this.element = element;
