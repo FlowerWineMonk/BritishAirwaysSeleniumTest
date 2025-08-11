@@ -3,6 +3,7 @@ config/
 notes.txt
 .idea/
 /allure-results
+.allure
 
 # Eclipse related
 .settings/
