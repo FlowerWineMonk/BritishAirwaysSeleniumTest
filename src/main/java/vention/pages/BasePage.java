@@ -6,6 +6,7 @@ import vention.entity.User;
 import vention.customWebElement.WebElementImp;
 import vention.customWebElement.CustomFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
+import io.qameta.allure.Step;
 
 public abstract class BasePage {
   public BasePage() {
@@ -16,8 +17,13 @@ public abstract class BasePage {
     return "";
   }
 
-  public void openPage() {
+  @Step("Open page: {pageName}")
+  public void openPage(String pageName) {
     DriverManager.getDriver().get(getBaseUrl() + getRelativePath());
+  }
+
+  public void openPage() {
+    openPage(this.getClass().getSimpleName());
   }
 
   public String getBaseUrl() {

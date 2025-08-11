@@ -3,6 +3,7 @@ package vention.pages;
 import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 import vention.entity.User;
+import io.qameta.allure.Step;
 
 public class RegisterPage extends BasePage {
   private static final String RELATIVE_PATH = "/email-validation";
@@ -25,10 +26,12 @@ public class RegisterPage extends BasePage {
     super();
   }
 
+  @Step("Enter register credentials: email and password")
   public void enterRegisterCredentials(User user) {
     enterEmailAndPassword(emailInput, passwordInput, user);
   }
 
+  @Step("Click continue button")
   public void clickContinueButton() {
     continueButton.click();
   }

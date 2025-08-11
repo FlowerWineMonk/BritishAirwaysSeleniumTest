@@ -3,6 +3,7 @@ package vention.pages;
 import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
+import io.qameta.allure.Step;
 
 public class HomePage extends BasePage {
   private static final String RELATIVE_PATH = "/travel/home/public/en_us/";
@@ -34,26 +35,31 @@ public class HomePage extends BasePage {
     return RELATIVE_PATH;
   }
 
+  @Step("Select fare type")
   public void selectFare(String fareWay) {
     fareDropDown.click();
     WebElementImp.clickByLocator(By.xpath("//option[@value='" + fareWay + "']"), 10);
   }
 
+  @Step("Enter departure city and airport")
   public void enterFromDestination(String fromCity, String fromCityInfo) {
     fromInput.sendKeys(fromCity);
     WebElementImp.clickByLocator(By.id(fromCityInfo), 30);
   }
 
+  @Step("Enter destination city and airport")
   public void enterToDestination(String toCity, String toCityInfo) {
     toInput.sendKeys(toCity);
     WebElementImp.clickByLocator(By.id(toCityInfo), 30);
   }
 
+  @Step("Select departure date")
   public void selectDepartureDate(String date) {
     departureDateButton.click();
     WebElementImp.clickByLocator(By.xpath("//span[@data-testid='" + date + "']"), 20);
   }
 
+  @Step("Click find flights")
   public void clickFindFlightsButton() {
     findFlightsButton.click();
   }
