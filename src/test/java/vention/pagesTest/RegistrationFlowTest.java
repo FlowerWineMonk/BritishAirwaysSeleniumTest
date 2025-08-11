@@ -11,7 +11,8 @@ public class RegistrationFlowTest extends BaseTest {
   private final RegistrationSteps registrationSteps = new RegistrationSteps();
 
   @Test
-  @Epic("User Registration")
+  @Story("New user registers and completes profile setup")
+  @Severity(SeverityLevel.CRITICAL)
   @Feature("User registration and profile creation")
   @Description("This test verifies the full registration process for a new user, including profile creation. " +
       "It ensures the system accepts the provided details, processes the registration, " +
