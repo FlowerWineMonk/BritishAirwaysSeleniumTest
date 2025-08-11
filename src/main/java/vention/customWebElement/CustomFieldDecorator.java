@@ -20,22 +20,22 @@ public class CustomFieldDecorator extends DefaultFieldDecorator {
 
     ElementLocator locator = factory.createLocator(field);
     if (locator == null) {
-        return null;
+      return null;
     }
 
     if (BaseElement.class.isAssignableFrom(type)) {
-        WebElement element = proxyForLocator(loader, locator);
-        return wrapElement(type, element);
+      WebElement element = proxyForLocator(loader, locator);
+      return wrapElement(type, element);
     }
     return super.decorate(loader, field);
   }
 
   public Object wrapElement(Class<?> type, WebElement element) {
     try {
-        Constructor<?> constr = type.getConstructor(WebElement.class);
-        return constr.newInstance(element);
+      Constructor<?> constr = type.getConstructor(WebElement.class);
+      return constr.newInstance(element);
     } catch (Exception e) {
-        throw new RuntimeException("Failed to wrap" + type.getName(), e);
+      throw new RuntimeException("Failed to wrap" + type.getName(), e);
     }
   }
 }
