@@ -1,6 +1,6 @@
 package vention.steps;
 
-import vention.driver.DriverManager;
+import vention.customWebElement.WebElementImp;
 import vention.pages.CookiePopup;
 import vention.pages.HomePage;
 import io.qameta.allure.Step;
@@ -24,8 +24,9 @@ public class BookingSteps {
     homePage.clickFindFlightsButton();
   }
 
-  @Step("Verify user is redirected to outbound page containing: {outboundUrl}")
-  public boolean isUserRedirectedToOutboundPage(String outboundUrl) {
-    return DriverManager.getDriver().getCurrentUrl().contains(outboundUrl);
+  @Step("Verify user is redirected to outbound page containing: {outboundUrl} or {anotherOutboundUrl}")
+  public boolean isUserRedirectedToOutboundPage(String outboundUrl, String anotherOutboundUrl) {
+    return WebElementImp.waitForUrlContains(outboundUrl, 10)
+        || WebElementImp.waitForUrlContains(anotherOutboundUrl, 10);
   }
 }

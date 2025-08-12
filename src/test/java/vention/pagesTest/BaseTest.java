@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
   protected static final String OUTBOUND_URL = "/airselect";
+  protected static final String ANOTHER_OUTBOUND_URL = "/flightList";
   protected static final String FARE_TYPE_ONE_WAY = "oneWay";
   protected static final String DEPARTURE_DATE = "calendar-day-30/09/2025";
   protected static final String TITLE_VALUE = "Mr";

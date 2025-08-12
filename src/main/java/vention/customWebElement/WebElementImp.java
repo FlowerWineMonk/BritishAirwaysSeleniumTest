@@ -45,6 +45,11 @@ public class WebElementImp implements BaseElement {
         .until(ExpectedConditions.elementToBeClickable(locator)).click();
   }
 
+  public static boolean waitForUrlContains(String partialUrl, int seconds) {
+    return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
+        .until(ExpectedConditions.urlContains(partialUrl));
+  }
+
   @Override
   public void click() {
     waitElementToBeClickable(element).click();
@@ -64,12 +69,16 @@ public class WebElementImp implements BaseElement {
 
   @Override
   public boolean isDisplayed() {
-    waitElementToBeVisible(element);
-    return element.isDisplayed();
+    try {
+      waitElementToBeVisible(element, DEFAULT_TIME);
+      return element.isDisplayed();
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   @Override
   public String getText() {
-    return element.getText();
+    return waitElementToBeVisible(element, DEFAULT_TIME).getText();
   }
 }
