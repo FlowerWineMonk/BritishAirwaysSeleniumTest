@@ -32,5 +32,7 @@ public class DriverFactory {
     return new FirefoxDriver();
   }
 
-  public enum BrowserType {CHROME, FIREFOX};
+  public enum BrowserType {
+    CHROME, FIREFOX
+  };
 }

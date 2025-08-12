@@ -31,15 +31,23 @@ public class WebElementImp implements BaseElement {
   }
 
   private WebElement waitElementToBeClickable(WebElement element, int seconds) {
-    return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds)).until(ExpectedConditions.elementToBeClickable(element));
+    return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
+        .until(ExpectedConditions.elementToBeClickable(element));
   }
 
   private WebElement waitElementToBeVisible(WebElement element, int seconds) {
-    return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds)).until(ExpectedConditions.visibilityOf(element));
+    return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
+        .until(ExpectedConditions.visibilityOf(element));
   }
 
   public static void clickByLocator(By locator, int seconds) {
-    new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds)).until(ExpectedConditions.elementToBeClickable(locator)).click();
+    new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
+        .until(ExpectedConditions.elementToBeClickable(locator)).click();
+  }
+
+  public static boolean waitForUrlContains(String partialUrl, int seconds) {
+    return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
+        .until(ExpectedConditions.urlContains(partialUrl));
   }
 
   @Override
@@ -61,12 +69,16 @@ public class WebElementImp implements BaseElement {
 
   @Override
   public boolean isDisplayed() {
-    waitElementToBeVisible(element);
-    return element.isDisplayed();
+    try {
+      waitElementToBeVisible(element, DEFAULT_TIME);
+      return element.isDisplayed();
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   @Override
   public String getText() {
-    return element.getText();
+    return waitElementToBeVisible(element, DEFAULT_TIME).getText();
   }
 }

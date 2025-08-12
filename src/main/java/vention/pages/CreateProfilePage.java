@@ -4,6 +4,7 @@ import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 import vention.entity.User;
+import io.qameta.allure.Step;
 
 public class CreateProfilePage extends BasePage {
   private static final String RELATIVE_PATH = "/register";
@@ -35,27 +36,33 @@ public class CreateProfilePage extends BasePage {
     super();
   }
 
+  @Step("Select title")
   public void selectTitle(String titleValue) {
     titleDropdown.click();
     WebElementImp.clickByLocator(By.xpath("//option[@value='" + titleValue + "']"), 15);
   }
 
+  @Step("Enter name credentials: first name and last name")
   public void enterNameCredentials(User user) {
     firstNameInput.sendKeys(user.getFirstName());
     lastNameInput.sendKeys(user.getLastName());
   }
 
+  @Step("Select country code")
   public void selectCountryCode(String code) {
     countryCodeDropdown.click();
     WebElementImp.clickByLocator(By.xpath("//option[@value='" + code + "']"), 15);
   }
 
+  @Step("Enter phone number")
   public void enterPhoneNumber(User user) {
     phoneNumberInput.sendKeys(user.getPhone());
   }
 
+  @Step("Click register button")
   public void clickRegisterButton() {
-    registerButton.click();;
+    registerButton.click();
+    ;
   }
 
   public boolean isTitleDropdownDisplayed() {

@@ -7,18 +7,18 @@ public class UserFactory {
 
   public static User getExistingUser() {
     return User.builder()
-            .email("abc123ABC@gmail.com")
-            .password("abc123ABC").build();
+        .email("abc123ABC@gmail.com")
+        .password("abc123ABC").build();
   }
 
   public static User getRandomUser() {
     return User.builder()
-            .username(faker.name().username())
-            .password(faker.internet().password())
-            .email(faker.internet().emailAddress())
-            .phone(faker.phoneNumber().cellPhone())
-            .firstName(faker.name().firstName())
-            .lastName(faker.name().lastName())
-            .build();
+        .username(faker.name().username())
+        .password(faker.internet().password())
+        .email(faker.internet().emailAddress())
+        .phone(faker.phoneNumber().cellPhone())
+        .firstName(faker.name().firstName())
+        .lastName(faker.name().lastName())
+        .build();
   }
 }

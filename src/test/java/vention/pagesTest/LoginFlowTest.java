@@ -1,23 +1,25 @@
 package vention.pagesTest;
 
-import vention.pages.HomePage;
+import vention.steps.LoginSteps;
 import org.testng.annotations.Test;
 import org.testng.Assert;
+import io.qameta.allure.*;
 
+@Epic("User Authentication")
+@Feature("Login functionality")
 public class LoginFlowTest extends BaseTest {
-  private PreLoginPageTest preLoginPageTest;
-  private LoginPageTest loginPageTest;
-  private HomePage homePage;
+  private final LoginSteps loginSteps = new LoginSteps();
 
   @Test
+  @Story("Existing user logs into the platform")
+  @Severity(SeverityLevel.BLOCKER)
+  @Description("This test verifies that when an existing registered user logs in with valid credentials, " +
+      "the system authenticates them and redirects to the home page. " +
+      "It ensures the login flow works from entering credentials to confirming the home page is visible.")
   public void testCompleteUserLoginFlow() {
-    preLoginPageTest = new PreLoginPageTest();
-    preLoginPageTest.clickLoginButtonTest();
+    loginSteps.loginWithExistingUser(existingUser);
 
-    loginPageTest = new LoginPageTest();
-    loginPageTest.enterLoginCredentials();
-
-    homePage = new HomePage();
-    Assert.assertTrue(homePage.isPageOpened(), "User should be redirected to the home page after login");
+    Assert.assertTrue(loginSteps.isHomePageVisibleAfterLogin(),
+        "User should be redirected to the home page after login");
   }
 }

@@ -2,6 +2,7 @@ package vention.pages;
 
 import vention.customWebElement.WebElementImp;
 import org.openqa.selenium.support.FindBy;
+import io.qameta.allure.Step;
 
 public class PreLoginPage extends BasePage {
   private static final String RELATIVE_PATH = "/nx/b/account/en/usa/account/pre-login";
@@ -21,12 +22,14 @@ public class PreLoginPage extends BasePage {
     super();
   }
 
+  @Step("Click login button")
   public void clickLoginButton() {
-    loginButton.click(15);
+    loginButton.click(30);
   }
 
+  @Step("Click register button")
   public void clickRegisterButton() {
-    registerButton.click(15);
+    registerButton.click(30);
   }
 
   public boolean isLoginButtonDisplayed() {
