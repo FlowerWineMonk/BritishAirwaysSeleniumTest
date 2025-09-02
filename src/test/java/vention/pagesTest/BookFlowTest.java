@@ -24,7 +24,7 @@ public class BookFlowTest extends BaseTest {
         Cities.LONDON.getCityAirport(),
         DEPARTURE_DATE);
 
-    Assert.assertTrue(bookingSteps.isUserRedirectedToOutboundPage(OUTBOUND_URL, ANOTHER_OUTBOUND_URL),
+      Assert.assertTrue(bookingSteps.isUserRedirectedToOutboundPage(OUTBOUND_URL, ANOTHER_OUTBOUND_URL),
         "User should be redirected to outbound page after booking a flight");
   }
 }

@@ -1,15 +1,17 @@
 package vention.customWebElement;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 public class CustomFieldDecorator extends DefaultFieldDecorator {
+
   public CustomFieldDecorator(SearchContext context) {
     super(new DefaultElementLocatorFactory(context));
   }
@@ -18,24 +20,79 @@ public class CustomFieldDecorator extends DefaultFieldDecorator {
   public Object decorate(ClassLoader loader, Field field) {
     Class<?> type = field.getType();
 
-    ElementLocator locator = factory.createLocator(field);
-    if (locator == null) {
-      return null;
+    if (BaseElement.class.isAssignableFrom(type)) {
+      By locator = extractLocator(field);
+      if (locator != null) {
+        String locatorPattern = extractLocatorPattern(locator);
+        DynamicLocator dynamicLocator = new DynamicLocator(locator, locatorPattern);
+        return wrapElement(type, dynamicLocator);
+      }
     }
 
-    if (BaseElement.class.isAssignableFrom(type)) {
-      WebElement element = proxyForLocator(loader, locator);
-      return wrapElement(type, element);
-    }
     return super.decorate(loader, field);
   }
 
-  public Object wrapElement(Class<?> type, WebElement element) {
+  private By extractLocator(Field field) {
+    FindBy findBy = field.getAnnotation(FindBy.class);
+    if (findBy == null)
+      return null;
+
+    if (!findBy.xpath().isEmpty()) {
+      return By.xpath(findBy.xpath());
+    } else if (!findBy.id().isEmpty()) {
+      return By.id(findBy.id());
+    } else if (!findBy.css().isEmpty()) {
+      return By.cssSelector(findBy.css());
+    } else if (!findBy.className().isEmpty()) {
+      return By.className(findBy.className());
+    } else if (!findBy.name().isEmpty()) {
+      return By.name(findBy.name());
+    } else if (!findBy.tagName().isEmpty()) {
+      return By.tagName(findBy.tagName());
+    } else if (!findBy.linkText().isEmpty()) {
+      return By.linkText(findBy.linkText());
+    } else if (!findBy.partialLinkText().isEmpty()) {
+      return By.partialLinkText(findBy.partialLinkText());
+    }
+
+    return null;
+  }
+
+  private String extractLocatorPattern(By locator) {
+    String locatorString = locator.toString();
+
+    if (locatorString.startsWith("By.xpath: ")) {
+      return locatorString.substring("By.xpath: ".length());
+    } else if (locatorString.startsWith("By.id: ")) {
+      return locatorString.substring("By.id: ".length());
+    } else if (locatorString.startsWith("By.cssSelector: ")) {
+      return locatorString.substring("By.cssSelector: ".length());
+    } else if (locatorString.startsWith("By.className: ")) {
+      return locatorString.substring("By.className: ".length());
+    } else if (locatorString.startsWith("By.name: ")) {
+      return locatorString.substring("By.name: ".length());
+    } else if (locatorString.startsWith("By.tagName: ")) {
+      return locatorString.substring("By.tagName: ".length());
+    } else if (locatorString.startsWith("By.linkText: ")) {
+      return locatorString.substring("By.linkText: ".length());
+    } else if (locatorString.startsWith("By.partialLinkText: ")) {
+      return locatorString.substring("By.partialLinkText: ".length());
+    }
+
+    return locatorString;
+  }
+
+  public Object wrapElement(Class<?> type, DynamicLocator dynamicLocator) {
     try {
-      Constructor<?> constr = type.getConstructor(WebElement.class);
-      return constr.newInstance(element);
+      Constructor<?> constr = type.getConstructor(DynamicLocator.class);
+      return constr.newInstance(dynamicLocator);
     } catch (Exception e) {
-      throw new RuntimeException("Failed to wrap" + type.getName(), e);
+      try {
+        Constructor<?> constr = type.getConstructor(WebElement.class);
+        return constr.newInstance((WebElement) null);
+      } catch (Exception ex) {
+        throw new RuntimeException("Failed to wrap " + type.getName(), e);
+      }
     }
   }
 }

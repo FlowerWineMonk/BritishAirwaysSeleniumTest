@@ -1,11 +1,12 @@
 package vention.steps;
 
-import vention.customWebElement.WebElementImp;
 import vention.pages.CookiePopup;
 import vention.pages.HomePage;
 import io.qameta.allure.Step;
+import vention.utils.WaitUtils;
 
 public class BookingSteps {
+
   @Step("Book one-way flight from {fromCity} ({fromAirport}) to {toCity} ({toAirport}) on {departureDate} with fare type {fareType}")
   public void bookOneWayFlight(String fareType, String fromCity, String fromAirport, String toCity, String toAirport,
       String departureDate) {
@@ -26,7 +27,7 @@ public class BookingSteps {
 
   @Step("Verify user is redirected to outbound page containing: {outboundUrl} or {anotherOutboundUrl}")
   public boolean isUserRedirectedToOutboundPage(String outboundUrl, String anotherOutboundUrl) {
-    return WebElementImp.waitForUrlContains(outboundUrl, 10)
-        || WebElementImp.waitForUrlContains(anotherOutboundUrl, 10);
+    return WaitUtils.waitForUrlContains(outboundUrl, 10)
+        || WaitUtils.waitForUrlContains(anotherOutboundUrl, 10);
   }
 }
