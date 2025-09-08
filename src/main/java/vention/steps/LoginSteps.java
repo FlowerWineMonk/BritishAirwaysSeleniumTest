@@ -5,7 +5,8 @@ import vention.pages.*;
 import io.qameta.allure.Step;
 
 public class LoginSteps {
-  @Step("Login with user: {user.email}}")
+
+  @Step("Login with user: email: {user.email} and password: {user.password}")
   public void loginWithExistingUser(User user) {
     PreLoginPage preLoginPage = new PreLoginPage();
     preLoginPage.openPage();
@@ -24,7 +25,6 @@ public class LoginSteps {
 
   @Step("Verify home page is visible after login")
   public boolean isHomePageVisibleAfterLogin() {
-    HomePage homePage = new HomePage();
-    return homePage.isPageOpened();
+    return new HomePage().isFromInputDisplayed();
   }
 }

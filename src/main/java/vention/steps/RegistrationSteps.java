@@ -3,10 +3,12 @@ package vention.steps;
 import vention.pages.*;
 import vention.entity.User;
 import io.qameta.allure.Step;
+import vention.utils.WaitUtils;
 
 public class RegistrationSteps {
-  @Step("Register new user {user.email} with title '{title}' and country code '{countryCode}'")
-  public void registerNewUserFlow(User user, String title, String countryCode) {
+
+  @Step("Register new user with email: {user.email}, password: {user.password}, title: '{titleValue}', country code: '{countryCodeValue}', phone: {user.phone}, first name: {user.firstName}, last name: {user.lastName}")
+  public void registerNewUser(String titleValue, User user, String countryCodeValue) {
     PreLoginPage preLoginPage = new PreLoginPage();
     preLoginPage.openPage();
 
@@ -25,16 +27,15 @@ public class RegistrationSteps {
     accountSelectionPage.clickContinueButton();
 
     CreateProfilePage createProfilePage = new CreateProfilePage();
-    createProfilePage.selectTitle(title);
+    createProfilePage.selectTitle(titleValue);
     createProfilePage.enterNameCredentials(user);
-    createProfilePage.selectCountryCode(countryCode);
+    createProfilePage.selectCountryCode(countryCodeValue);
     createProfilePage.enterPhoneNumber(user);
     createProfilePage.clickRegisterButton();
   }
 
-  @Step("Verify home page is visible after registration")
-  public boolean isHomePageVisibleAfterRegistration() {
-    HomePage homePage = new HomePage();
-    return homePage.isPageOpened();
+  @Step("Verify home page is visible after registration: {confirmationUrl}")
+  public boolean isConfirmationPageVisibleAfterRegistration(String confirmationUrl) {
+    return WaitUtils.waitForUrlContains(confirmationUrl, 10);
   }
 }

@@ -14,7 +14,7 @@ public class UserFactory {
   public static User getRandomUser() {
     return User.builder()
         .username(faker.name().username())
-        .password(faker.internet().password())
+        .password(faker.internet().password(10, 20, true))
         .email(faker.internet().emailAddress())
         .phone(faker.phoneNumber().cellPhone())
         .firstName(faker.name().firstName())

@@ -18,9 +18,9 @@ public class RegistrationFlowTest extends BaseTest {
       "It ensures the system accepts the provided details, processes the registration, " +
       "and redirects the user to the home page upon successful account creation.")
   public void testCompleteUserRegistrationFlowWithProfileCreation() {
-    registrationSteps.registerNewUserFlow(newUser, TITLE_VALUE, COUNTRY_CODE_VALUE);
+    registrationSteps.registerNewUser(TITLE_VALUE, newUser, COUNTRY_CODE_VALUE);
 
-    Assert.assertTrue(registrationSteps.isHomePageVisibleAfterRegistration(),
-        "User should be redirected to the home page after profile creation");
+    Assert.assertTrue(registrationSteps.isConfirmationPageVisibleAfterRegistration(CONFIRMATION_URL),
+        "User should be redirected to the confirmation page after profile creation");
   }
 }

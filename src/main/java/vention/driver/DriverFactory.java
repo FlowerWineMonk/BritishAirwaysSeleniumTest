@@ -7,17 +7,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
   public static WebDriver createLocalDriver(BrowserType browser) {
-    WebDriver driver = null;
-    switch (browser) {
-      case CHROME:
-        driver = getChromeDriver();
-        break;
-      case FIREFOX:
-        driver = getFirefoxDriver();
-        break;
-      default:
-        throw new IllegalArgumentException("Unsupported browser: " + browser);
-    }
+    WebDriver driver = switch (browser) {
+      case CHROME -> getChromeDriver();
+      case FIREFOX -> getFirefoxDriver();
+      default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
+    };
     driver.manage().window().fullscreen();
     return driver;
   }
