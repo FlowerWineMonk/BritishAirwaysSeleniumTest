@@ -3,9 +3,10 @@ package vention.pages;
 import vention.configLoader.ConfigLoader;
 import vention.driver.DriverManager;
 import vention.entity.User;
-import vention.customWebElement.WebElementImp;
+import vention.customWebElement.CustomWebElement;
 import vention.customWebElement.CustomFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
+import io.qameta.allure.Step;
 
 public abstract class BasePage {
   public BasePage() {
@@ -16,8 +17,13 @@ public abstract class BasePage {
     return "";
   }
 
-  public void openPage() {
+  @Step("Open page: {pageName}")
+  public void openPage(String pageName) {
     DriverManager.getDriver().get(getBaseUrl() + getRelativePath());
+  }
+
+  public void openPage() {
+    openPage(this.getClass().getSimpleName());
   }
 
   public String getBaseUrl() {
@@ -29,7 +35,7 @@ public abstract class BasePage {
     return currentUrl.contains(getRelativePath());
   }
 
-  protected void enterEmailAndPassword(WebElementImp emailInput, WebElementImp passwordInput, User user) {
+  protected void enterEmailAndPassword(CustomWebElement emailInput, CustomWebElement passwordInput, User user) {
     emailInput.sendKeys(user.getEmail());
     passwordInput.sendKeys(user.getPassword());
   }

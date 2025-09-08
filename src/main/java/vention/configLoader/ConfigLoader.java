@@ -9,15 +9,15 @@ public class ConfigLoader {
   private static final String CONFIG_FILE_PATH = "src/test/config/application.properties";
 
   static {
-      try (FileInputStream fis = new FileInputStream(CONFIG_FILE_PATH)){
-          properties.load(fis);
-      } catch (IOException e) {
-          e.printStackTrace();
-          throw new RuntimeException("Could not load config file");
-      }
+    try (FileInputStream fis = new FileInputStream(CONFIG_FILE_PATH)) {
+      properties.load(fis);
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw new RuntimeException("Could not load config file");
+    }
   }
 
   public static String get(String key) {
-      return properties.getProperty(key);
+    return properties.getProperty(key);
   }
 }

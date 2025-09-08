@@ -1,20 +1,21 @@
 package vention.pages;
 
-import vention.customWebElement.WebElementImp;
+import vention.customWebElement.CustomWebElement;
 import org.openqa.selenium.support.FindBy;
 import vention.entity.User;
+import io.qameta.allure.Step;
 
 public class RegisterPage extends BasePage {
   private static final String RELATIVE_PATH = "/email-validation";
 
   @FindBy(id = "emailInput--inputtext--input")
-  private WebElementImp emailInput;
+  private CustomWebElement emailInput;
 
   @FindBy(id = "passwordInput--inputtext--input")
-  private WebElementImp passwordInput;
+  private CustomWebElement passwordInput;
 
   @FindBy(xpath = "//button[@data-testid='validation-submit-button']")
-  private WebElementImp continueButton;
+  private CustomWebElement continueButton;
 
   @Override
   public String getRelativePath() {
@@ -25,10 +26,12 @@ public class RegisterPage extends BasePage {
     super();
   }
 
+  @Step("Enter register credentials: {user}")
   public void enterRegisterCredentials(User user) {
     enterEmailAndPassword(emailInput, passwordInput, user);
   }
 
+  @Step("Click continue button")
   public void clickContinueButton() {
     continueButton.click();
   }

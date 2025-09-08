@@ -1,29 +1,33 @@
 package vention.pages;
 
-import vention.customWebElement.WebElementImp;
+import vention.customWebElement.CustomWebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.By;
+import io.qameta.allure.Step;
+import vention.utils.WaitUtils;
 
 public class HomePage extends BasePage {
   private static final String RELATIVE_PATH = "/travel/home/public/en_us/";
 
   @FindBy(id = "fare")
-  private WebElementImp fareDropDown;
+  private CustomWebElement fareDropDown;
 
   @FindBy(id = "from")
-  private WebElementImp fromInput;
+  private CustomWebElement fromInput;
 
   @FindBy(id = "to")
-  private WebElementImp toInput;
+  private CustomWebElement toInput;
+
+  @FindBy(id = "%s")
+  private CustomWebElement dynamicAirportOption;
 
   @FindBy(id = "departureDate")
-  private WebElementImp departureDateButton;
+  private CustomWebElement departureDateButton;
+
+  @FindBy(xpath = "//span[@data-testid='%s']")
+  private CustomWebElement dynamicDateOption;
 
   @FindBy(id = "flight-search-tab-inputs-flights-button-find-flights")
-  private WebElementImp findFlightsButton;
-
-  @FindBy(xpath = "//button[@data-testid='amex-offer-hero-variant-cta-button']")
-  private WebElementImp learnMoreButton;
+  private CustomWebElement findFlightsButton;
 
   public HomePage() {
     super();
@@ -34,32 +38,48 @@ public class HomePage extends BasePage {
     return RELATIVE_PATH;
   }
 
+  @Step("Select fare type: {fareWay}")
   public void selectFare(String fareWay) {
-    fareDropDown.click();
-    WebElementImp.clickByLocator(By.xpath("//option[@value='" + fareWay + "']"), 10);
+    CustomWebElement reloadedFare = WaitUtils.waitForElementReload(fareDropDown, 10);
+    reloadedFare.asSelect().selectByValue(fareWay);
   }
 
+  @Step("Enter departure city: {fromCity} and select airport: {fromCityInfo}")
   public void enterFromDestination(String fromCity, String fromCityInfo) {
-    fromInput.sendKeys(fromCity);
-    WebElementImp.clickByLocator(By.id(fromCityInfo), 30);
+    CustomWebElement reloadedFromInput = WaitUtils.waitForElementReload(fromInput, 10);
+    reloadedFromInput.getWrappedElement().clear();
+    reloadedFromInput.sendKeys(fromCity);
+
+    CustomWebElement reloadedAirportOption = WaitUtils.waitForElementReload(
+        dynamicAirportOption.withArgs(fromCityInfo), 10);
+    reloadedAirportOption.click();
   }
 
+  @Step("Enter destination city: {toCity} and select airport: {toCityInfo}")
   public void enterToDestination(String toCity, String toCityInfo) {
-    toInput.sendKeys(toCity);
-    WebElementImp.clickByLocator(By.id(toCityInfo), 30);
+    CustomWebElement reloadedToInput = WaitUtils.waitForElementReload(toInput, 10);
+    reloadedToInput.getWrappedElement().clear();
+    reloadedToInput.sendKeys(toCity);
+
+    CustomWebElement reloadedAirportOption = WaitUtils.waitForElementReload(
+        dynamicAirportOption.withArgs(toCityInfo), 10);
+    reloadedAirportOption.click();
   }
 
+  @Step("Select departure date: {date}")
   public void selectDepartureDate(String date) {
-    departureDateButton.click();
-    WebElementImp.clickByLocator(By.xpath("//span[@data-testid='" + date + "']"), 20);
+    CustomWebElement reloadedDepartureDateButton = WaitUtils.waitForElementReload(departureDateButton, 5);
+    reloadedDepartureDateButton.click();
+
+    CustomWebElement reloadedDateOption = WaitUtils.waitForElementReload(
+        dynamicDateOption.withArgs(date), 5);
+    reloadedDateOption.click();
   }
 
+  @Step("Click find flights")
   public void clickFindFlightsButton() {
-    findFlightsButton.click();
-  }
-
-  public void clickLearnMoreButton() {
-    learnMoreButton.click();
+    CustomWebElement reloadedFindFlightsButton = WaitUtils.waitForElementReload(findFlightsButton, 5);
+    reloadedFindFlightsButton.click();
   }
 
   public boolean isSelectFareDisplayed() {
@@ -76,13 +96,5 @@ public class HomePage extends BasePage {
 
   public boolean isDepartureDateButtonDisplayed() {
     return departureDateButton.isDisplayed();
-  }
-
-  public boolean isFindFlightsButtonDisplayed() {
-    return findFlightsButton.isDisplayed();
-  }
-
-  public boolean isLearnMoreButtonDisplayed() {
-    return learnMoreButton.isDisplayed();
   }
 }

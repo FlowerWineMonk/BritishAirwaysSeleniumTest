@@ -1,16 +1,17 @@
 package vention.pages;
 
-import vention.customWebElement.WebElementImp;
+import vention.customWebElement.CustomWebElement;
 import org.openqa.selenium.support.FindBy;
+import io.qameta.allure.Step;
 
 public class PreLoginPage extends BasePage {
   private static final String RELATIVE_PATH = "/nx/b/account/en/usa/account/pre-login";
 
   @FindBy(xpath = "//button[@data-testid='login-button']")
-  private WebElementImp loginButton;
+  private CustomWebElement loginButton;
 
   @FindBy(xpath = "//button[@data-testid='register-button']")
-  private WebElementImp registerButton;
+  private CustomWebElement registerButton;
 
   @Override
   public String getRelativePath() {
@@ -21,12 +22,14 @@ public class PreLoginPage extends BasePage {
     super();
   }
 
+  @Step("Click login button")
   public void clickLoginButton() {
-    loginButton.click(15);
+    loginButton.click(5);
   }
 
+  @Step("Click register button")
   public void clickRegisterButton() {
-    registerButton.click(15);
+    registerButton.click(5);
   }
 
   public boolean isLoginButtonDisplayed() {
