@@ -4,11 +4,6 @@ import vention.customWebElement.CustomWebElement;
 import org.openqa.selenium.support.FindBy;
 import vention.entity.User;
 import io.qameta.allure.Step;
-import vention.driver.DriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 
 public class CreateProfilePage extends BasePage {
   private static final String RELATIVE_PATH = "/register";
@@ -44,9 +39,7 @@ public class CreateProfilePage extends BasePage {
 
   @Step("Select title")
   public void selectTitle(String titleValue) {
-    new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10))
-        .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(TITLE_DROPDOWN_CSS)));
-    titleDropdown.asSelect().selectByValue(titleValue);
+    titleDropdown.customSelect(titleDropdown, titleValue, TITLE_DROPDOWN_CSS, 10);
   }
 
   @Step("Enter name credentials: first name and last name")
@@ -57,9 +50,7 @@ public class CreateProfilePage extends BasePage {
 
   @Step("Select country code")
   public void selectCountryCode(String countryCodeValue) {
-    new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10))
-        .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(COUNTRY_CODE_DROPDOWN_CSS)));
-    countryCodeDropdown.asSelect().selectByValue(countryCodeValue);
+    countryCodeDropdown.customSelect(countryCodeDropdown, countryCodeValue, COUNTRY_CODE_DROPDOWN_CSS, 10);
   }
 
   @Step("Enter phone number")
