@@ -3,7 +3,7 @@ package vention.pagesTest;
 import vention.steps.RegistrationSteps;
 import org.testng.annotations.Test;
 import org.testng.Assert;
-import io.qameta.allure.*;;
+import io.qameta.allure.*;
 
 @Epic("User Registration")
 @Feature("User registration and profile creation")
