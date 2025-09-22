@@ -38,7 +38,6 @@ services:
     volumes:
       - .:/workspace
     working_dir: /workspace
-    command: mvn clean test -Dbrowser=remote-firefox -DhubHost=selenium-hub -Dci=true
     depends_on:
       selenium-hub:
         condition: service_healthy
