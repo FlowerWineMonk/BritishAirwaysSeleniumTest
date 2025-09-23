@@ -44,40 +44,30 @@ public class CustomWebElement implements BaseElement {
     return new Select(getWrappedElement());
   }
 
-  public void customSelectFare(CustomWebElement fareId, String fareWay, int timeout) {
-    CustomWebElement reloadedFare = WaitUtils.waitForElementReload(fareId, timeout);
-    reloadedFare.asSelect().selectByValue(fareWay);
+  public void waitForReloadAndClick(int timeout) {
+    CustomWebElement reloadedElement = WaitUtils.waitForElementReload(this, timeout);
+    reloadedElement.click();
   }
 
-  public void customDropdownReload(CustomWebElement dropdownId, String dropdownKeys,
-      CustomWebElement dynamicAirportOption, String cityInfo, int timeout) {
-    CustomWebElement reloadedDropdown = WaitUtils.waitForElementReload(dropdownId, timeout);
-    reloadedDropdown.getWrappedElement().clear();
-    reloadedDropdown.sendKeys(dropdownKeys);
-
-    CustomWebElement reloadedOption = WaitUtils.waitForElementReload(dynamicAirportOption.withArgs(cityInfo),
-        timeout);
-    reloadedOption.click();
+  public void waitForReloadAndSelectByValue(String value, int timeout) {
+    CustomWebElement reloadedElement = WaitUtils.waitForElementReload(this, timeout);
+    reloadedElement.asSelect().selectByValue(value);
   }
 
-  public void customDepartureDate(CustomWebElement departureDateButton, CustomWebElement dynamicDateOption, String date,
-      int timeout) {
-    CustomWebElement reloadedDepartureDateButton = WaitUtils.waitForElementReload(departureDateButton, timeout);
-    reloadedDepartureDateButton.click();
-
-    CustomWebElement reloadedDateOption = WaitUtils.waitForElementReload(
-        dynamicDateOption.withArgs(date), timeout);
-    reloadedDateOption.click();
-  }
-
-  public void customClick(CustomWebElement findFlightsButton, int timeout) {
-    CustomWebElement reloadedFindFlightsButton = WaitUtils.waitForElementReload(findFlightsButton, timeout);
-    reloadedFindFlightsButton.click();
-  }
-
-  public void customSelect(CustomWebElement element, String value, String cssSelector, int timeout) {
+  public void waitForVisibilityAndSelectByValue(String value, String cssSelector, int timeout) {
     WaitUtils.waitForVisibilityOfElementLocated(cssSelector, timeout);
-    element.asSelect().selectByValue(value);
+    this.asSelect().selectByValue(value);
+  }
+
+  public void clearAndTypeWithReload(String text, int timeout) {
+    CustomWebElement reloadedElement = WaitUtils.waitForElementReload(this, timeout);
+    reloadedElement.getWrappedElement().clear();
+    reloadedElement.sendKeys(text);
+  }
+
+  public void waitForReloadAndClickOption(CustomWebElement dynamicOption, String optionValue, int timeout) {
+    CustomWebElement reloadedOption = WaitUtils.waitForElementReload(dynamicOption.withArgs(optionValue), timeout);
+    reloadedOption.click();
   }
 
   @Override

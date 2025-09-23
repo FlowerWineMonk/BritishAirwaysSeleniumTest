@@ -39,27 +39,30 @@ public class HomePage extends BasePage {
 
   @Step("Select fare type: {fareWay}")
   public void selectFare(String fareWay) {
-    fareDropDown.customSelectFare(fareDropDown, fareWay, 10);
+    fareDropDown.waitForReloadAndSelectByValue(fareWay, TIMEOUT);
   }
 
   @Step("Enter departure city: {fromCity} and select airport: {fromCityInfo}")
   public void enterFromDestination(String fromCity, String fromCityInfo) {
-    fromInput.customDropdownReload(fromInput, fromCity, dynamicAirportOption, fromCityInfo, 10);
+    fromInput.clearAndTypeWithReload(fromCity, TIMEOUT);
+    fromInput.waitForReloadAndClickOption(dynamicAirportOption, fromCityInfo, TIMEOUT);
   }
 
   @Step("Enter destination city: {toCity} and select airport: {toCityInfo}")
   public void enterToDestination(String toCity, String toCityInfo) {
-    toInput.customDropdownReload(toInput, toCity, dynamicAirportOption, toCityInfo, 10);
+    toInput.clearAndTypeWithReload(toCity, TIMEOUT);
+    toInput.waitForReloadAndClickOption(dynamicAirportOption, toCityInfo, TIMEOUT);
   }
 
   @Step("Select departure date: {date}")
   public void selectDepartureDate(String date) {
-    departureDateButton.customDepartureDate(departureDateButton, dynamicDateOption, date, 10);
+    departureDateButton.waitForReloadAndClick(5);
+    departureDateButton.waitForReloadAndClickOption(dynamicDateOption, date, 5);
   }
 
   @Step("Click find flights")
   public void clickFindFlightsButton() {
-    findFlightsButton.customClick(findFlightsButton, 10);
+    findFlightsButton.waitForReloadAndClick(5);
   }
 
   public boolean isSelectFareDisplayed() {
