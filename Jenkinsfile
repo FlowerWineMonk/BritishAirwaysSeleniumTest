@@ -1,6 +1,11 @@
 pipeline {
-    agent any
-
+    agent {
+        docker {
+            image 'docker:24.0.7-dind'   // DinD image with Docker inside
+            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
+    
     environment {
         DOCKER_COMPOSE = 'docker compose -f docker-compose.yml'
     }
