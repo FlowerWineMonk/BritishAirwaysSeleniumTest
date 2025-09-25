@@ -39,7 +39,7 @@ public class CreateProfilePage extends BasePage {
 
   @Step("Select title")
   public void selectTitle(String titleValue) {
-    titleDropdown.waitForVisibilityAndSelectByValue(titleValue, TITLE_DROPDOWN_CSS, TIMEOUT);
+    titleDropdown.waitForVisibilityAndSelectByValue(titleValue, TITLE_DROPDOWN_CSS);
   }
 
   @Step("Enter name credentials: first name and last name")
@@ -50,7 +50,7 @@ public class CreateProfilePage extends BasePage {
 
   @Step("Select country code")
   public void selectCountryCode(String countryCodeValue) {
-    countryCodeDropdown.waitForVisibilityAndSelectByValue(countryCodeValue, COUNTRY_CODE_DROPDOWN_CSS, TIMEOUT);
+    countryCodeDropdown.waitForVisibilityAndSelectByValue(countryCodeValue, COUNTRY_CODE_DROPDOWN_CSS);
   }
 
   @Step("Enter phone number")

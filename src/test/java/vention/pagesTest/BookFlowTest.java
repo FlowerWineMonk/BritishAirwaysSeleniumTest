@@ -18,13 +18,11 @@ public class BookFlowTest extends BaseTest {
       "with the given departure date, the system redirects the user to the outbound flight selection page.")
   public void testBookFlight() {
     bookingSteps.bookOneWayFlight(FARE_TYPE_ONE_WAY,
-        Cities.NEW_YORK.getCityName(),
-        Cities.NEW_YORK.getCityAirport(),
-        Cities.LONDON.getCityName(),
-        Cities.LONDON.getCityAirport(),
+        Cities.NEW_YORK,
+        Cities.LONDON,
         DEPARTURE_DATE);
 
-      Assert.assertTrue(bookingSteps.isUserRedirectedToOutboundPage(OUTBOUND_URL, ANOTHER_OUTBOUND_URL),
+    Assert.assertTrue(bookingSteps.isUserRedirectedToOutboundPage(OUTBOUND_URL, ANOTHER_OUTBOUND_URL),
         "User should be redirected to outbound page after booking a flight");
   }
 }

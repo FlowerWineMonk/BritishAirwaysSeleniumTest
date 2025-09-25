@@ -39,30 +39,30 @@ public class HomePage extends BasePage {
 
   @Step("Select fare type: {fareWay}")
   public void selectFare(String fareWay) {
-    fareDropDown.waitForReloadAndSelectByValue(fareWay, TIMEOUT);
+    fareDropDown.waitForReloadAndSelectByValue(fareWay);
   }
 
   @Step("Enter departure city: {fromCity} and select airport: {fromCityInfo}")
   public void enterFromDestination(String fromCity, String fromCityInfo) {
-    fromInput.clearAndTypeWithReload(fromCity, TIMEOUT);
-    fromInput.waitForReloadAndClickOption(dynamicAirportOption, fromCityInfo, TIMEOUT);
+    fromInput.clearAndTypeWithReload(fromCity);
+    fromInput.waitForReloadAndClickOption(dynamicAirportOption, fromCityInfo);
   }
 
   @Step("Enter destination city: {toCity} and select airport: {toCityInfo}")
   public void enterToDestination(String toCity, String toCityInfo) {
-    toInput.clearAndTypeWithReload(toCity, TIMEOUT);
-    toInput.waitForReloadAndClickOption(dynamicAirportOption, toCityInfo, TIMEOUT);
+    toInput.clearAndTypeWithReload(toCity);
+    toInput.waitForReloadAndClickOption(dynamicAirportOption, toCityInfo);
   }
 
   @Step("Select departure date: {date}")
   public void selectDepartureDate(String date) {
-    departureDateButton.waitForReloadAndClick(5);
-    departureDateButton.waitForReloadAndClickOption(dynamicDateOption, date, 5);
+    departureDateButton.waitForReloadAndClick();
+    departureDateButton.waitForReloadAndClickOption(dynamicDateOption, date);
   }
 
   @Step("Click find flights")
   public void clickFindFlightsButton() {
-    findFlightsButton.waitForReloadAndClick(5);
+    findFlightsButton.waitForReloadAndClick();
   }
 
   public boolean isSelectFareDisplayed() {

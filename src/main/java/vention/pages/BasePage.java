@@ -9,8 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import io.qameta.allure.Step;
 
 public abstract class BasePage {
-  protected final int TIMEOUT = 10;
-
   public BasePage() {
     PageFactory.initElements(new CustomFieldDecorator(DriverManager.getDriver()), this);
   }

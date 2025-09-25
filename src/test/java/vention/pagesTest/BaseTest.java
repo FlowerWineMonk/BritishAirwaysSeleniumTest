@@ -23,7 +23,7 @@ public class BaseTest {
 
   @BeforeClass
   public void beforeClass() {
-    DriverManager.setDriver(DriverFactory.createLocalDriver(DriverFactory.BrowserType.CHROME));
+    DriverManager.setDriver(DriverFactory.createLocalDriver(DriverFactory.BrowserType.FIREFOX));
     existingUser = UserFactory.getExistingUser();
     newUser = UserFactory.getRandomUser();
   }

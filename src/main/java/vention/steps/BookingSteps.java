@@ -1,5 +1,6 @@
 package vention.steps;
 
+import vention.enums.Cities;
 import vention.pages.CookiePopup;
 import vention.pages.HomePage;
 import io.qameta.allure.Step;
@@ -8,8 +9,7 @@ import vention.utils.WaitUtils;
 public class BookingSteps {
 
   @Step("Book one-way flight from {fromCity} ({fromAirport}) to {toCity} ({toAirport}) on {departureDate} with fare type {fareType}")
-  public void bookOneWayFlight(String fareType, String fromCity, String fromAirport, String toCity, String toAirport,
-      String departureDate) {
+  public void bookOneWayFlight(String fareType, Cities from, Cities to, String departureDate) {
     HomePage homePage = new HomePage();
     homePage.openPage();
 
@@ -19,8 +19,8 @@ public class BookingSteps {
     }
 
     homePage.selectFare(fareType);
-    homePage.enterFromDestination(fromCity, fromAirport);
-    homePage.enterToDestination(toCity, toAirport);
+    homePage.enterFromDestination(from.getCityName(), from.getCityAirport());
+    homePage.enterToDestination(to.getCityName(), to.getCityAirport());
     homePage.selectDepartureDate(departureDate);
     homePage.clickFindFlightsButton();
   }

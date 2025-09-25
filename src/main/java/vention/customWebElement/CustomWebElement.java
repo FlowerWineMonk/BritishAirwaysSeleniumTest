@@ -9,6 +9,7 @@ import vention.driver.DriverManager;
 public class CustomWebElement implements BaseElement {
   private final DynamicLocator dynamicLocator;
   private String[] currentArgs;
+  private final int TIMEOUT = 10;
 
   public CustomWebElement(DynamicLocator dynamicLocator) {
     this.dynamicLocator = dynamicLocator;
@@ -44,30 +45,27 @@ public class CustomWebElement implements BaseElement {
     return new Select(getWrappedElement());
   }
 
-  public void waitForReloadAndClick(int timeout) {
-    CustomWebElement reloadedElement = WaitUtils.waitForElementReload(this, timeout);
-    reloadedElement.click();
+  public void waitForReloadAndClick() {
+    WaitUtils.waitForElementReload(this, TIMEOUT).click();
   }
 
-  public void waitForReloadAndSelectByValue(String value, int timeout) {
-    CustomWebElement reloadedElement = WaitUtils.waitForElementReload(this, timeout);
-    reloadedElement.asSelect().selectByValue(value);
+  public void waitForReloadAndSelectByValue(String value) {
+    WaitUtils.waitForElementReload(this, TIMEOUT).asSelect().selectByValue(value);
   }
 
-  public void waitForVisibilityAndSelectByValue(String value, String cssSelector, int timeout) {
-    WaitUtils.waitForVisibilityOfElementLocated(cssSelector, timeout);
+  public void waitForVisibilityAndSelectByValue(String value, String cssSelector) {
+    WaitUtils.waitForVisibilityOfElementLocated(cssSelector, TIMEOUT);
     this.asSelect().selectByValue(value);
   }
 
-  public void clearAndTypeWithReload(String text, int timeout) {
-    CustomWebElement reloadedElement = WaitUtils.waitForElementReload(this, timeout);
+  public void clearAndTypeWithReload(String text) {
+    CustomWebElement reloadedElement = WaitUtils.waitForElementReload(this, TIMEOUT);
     reloadedElement.getWrappedElement().clear();
     reloadedElement.sendKeys(text);
   }
 
-  public void waitForReloadAndClickOption(CustomWebElement dynamicOption, String optionValue, int timeout) {
-    CustomWebElement reloadedOption = WaitUtils.waitForElementReload(dynamicOption.withArgs(optionValue), timeout);
-    reloadedOption.click();
+  public void waitForReloadAndClickOption(CustomWebElement dynamicOption, String optionValue) {
+    WaitUtils.waitForElementReload(dynamicOption.withArgs(optionValue), TIMEOUT).click();
   }
 
   @Override
