@@ -50,6 +50,17 @@ pipeline {
                         """
                     }
                 }
+                stage('Report') {
+                    steps {
+                        publishHTML(target: [
+                            reportName: 'Selenium Test Report',
+                            reportDir: 'target/surefire-reports',
+                            reportFiles: 'index.html',
+                            alwaysLinkToLastBuild: true,
+                            keepAll: true
+                        ])
+                    }
+                }
             }
         }
     }
@@ -57,13 +68,7 @@ pipeline {
     post {
         always {
             echo 'Archiving results...'
-            sh 'chmod -R 777 target/allure-results || true'
-            junit '**/target/surefire-reports/**/*.xml'
-            allure([
-                includeProperties: false,
-                jdk: '',
-                results: [[path: 'target/allure-results']]
-            ])
+            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
 
             echo 'Cleaning up containers...'
             sh "${DOCKER_COMPOSE} down"
