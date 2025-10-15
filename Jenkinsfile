@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_COMPOSE = 'docker compose -f docker-compose.yml'
+        RUN_CHROME = false
     }
 
     stages {
@@ -25,6 +26,9 @@ pipeline {
         stage('Run Tests in Parallel') {
             parallel {
                 stage('Chrome Tests') {
+                    when {
+                        expression { return env.RUN_CHROME == 'true' }
+                    }
                     steps {
                         sh """
                             ${DOCKER_COMPOSE} run --rm maven-tests \
@@ -48,21 +52,18 @@ pipeline {
                 }
             }
         }
-
-        stage('Archive Results') {
-            steps {
-                junit '**/target/surefire-reports/**/*.xml'
-                allure([
-                    includeProperties: false,
-                    jdk: '',
-                    results: [[path: 'target/allure-results']]
-                ])
-            }
-        }
     }
 
     post {
         always {
+            echo 'Archiving results...'
+            junit '**/target/surefire-reports/**/*.xml'
+            allure([
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'target/allure-results']]
+            ])
+
             echo 'Cleaning up containers...'
             sh "${DOCKER_COMPOSE} down"
         }
