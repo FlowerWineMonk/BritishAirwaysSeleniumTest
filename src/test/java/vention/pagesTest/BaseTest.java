@@ -16,7 +16,7 @@ public class BaseTest {
   protected static final String COUNTRY_CODE_VALUE = "+1";
   protected static final String CONFIRMATION_URL = "/confirmation";
   protected static final String DEPARTURE_DATE = "calendar-day-" +
-      LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+      LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
   protected User existingUser;
   protected User newUser;
