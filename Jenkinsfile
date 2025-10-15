@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:24.0.7-dind'
-            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent  any
 
     environment {
         DOCKER_COMPOSE = 'docker compose -f docker-compose.yml'
@@ -18,8 +13,12 @@ pipeline {
         }
 
         stage('Start Selenium Grid') {
-            steps {
-                sh "${DOCKER_COMPOSE} up -d selenium-hub chrome firefox"
+           steps {
+              sh """
+                  ${DOCKER_COMPOSE} down || true
+                  docker rm -f selenium-hub || true
+                  ${DOCKER_COMPOSE} up -d selenium-hub chrome firefox
+              """
             }
         }
 
@@ -33,12 +32,6 @@ pipeline {
                               -Dbrowser=remote-chrome \
                               -DhubHost=selenium-hub \
                               -Dci=true
-
-                            mkdir -p target/allure-results/chrome
-                            mv target/allure-results/* target/allure-results/chrome/ || true
-
-                            mkdir -p target/surefire-reports/chrome
-                            mv target/surefire-reports/* target/surefire-reports/chrome/ || true
                         """
                     }
                 }
@@ -50,12 +43,6 @@ pipeline {
                               -Dbrowser=remote-firefox \
                               -DhubHost=selenium-hub \
                               -Dci=true
-
-                            mkdir -p target/allure-results/firefox
-                            mv target/allure-results/* target/allure-results/firefox/ || true
-
-                            mkdir -p target/surefire-reports/firefox
-                            mv target/surefire-reports/* target/surefire-reports/firefox/ || true
                         """
                     }
                 }
