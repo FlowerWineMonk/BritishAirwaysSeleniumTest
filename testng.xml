@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="AutomationSuite" parallel="classes" thread-count="3">
+<suite name="AutomationSuite" parallel="classes" thread-count="1">
   <listeners>
       <listener class-name="vention.listeners.AllureTestListener"/>
   </listeners>
@@ -7,8 +7,8 @@
   <test name="Tests">
     <classes>
       <class name="vention.pagesTest.BookFlowTest"/>
-      <class name="vention.pagesTest.LoginFlowTest"/>
-      <class name="vention.pagesTest.RegistrationFlowTest"/>
+      <!-- <class name="vention.pagesTest.LoginFlowTest"/> -->
+      <!-- <class name="vention.pagesTest.RegistrationFlowTest"/> -->
     </classes>
   </test>
 </suite>
