@@ -7,7 +7,7 @@ import io.qameta.allure.Step;
 public class HomePage extends BasePage {
   private static final String RELATIVE_PATH = "/travel/home/public/en_us/";
 
-  @FindBy(id = "fare")
+  @FindBy(id = "fareSelector")
   private CustomWebElement fareDropDown;
 
   @FindBy(id = "from")
