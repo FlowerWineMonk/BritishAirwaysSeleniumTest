@@ -57,6 +57,7 @@ pipeline {
     post {
         always {
             echo 'Archiving results...'
+            sh 'chmod -R 777 target/allure-results || true'
             junit '**/target/surefire-reports/**/*.xml'
             allure([
                 includeProperties: false,
