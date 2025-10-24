@@ -4,7 +4,6 @@ pipeline {
     environment {
         DOCKER_COMPOSE = 'docker compose -f docker-compose.yml'
         RUN_CHROME = false
-        ALLURE_RESULTS_DIR = 'allure-results'
     }
 
     stages {
@@ -16,11 +15,11 @@ pipeline {
 
         stage('Clean Previous Results') {
             steps {
-                sh """
-                    rm -rf ${ALLURE_RESULTS_DIR} || true
-                    rm -rf target/allure-results || true
-                """
-            }
+                sh '''
+                  docker run --rm -v ${WORKSPACE}:/ws alpine:3.18 \
+                    sh -c "rm -rf /ws/target/allure-results /ws/target/surefire-reports /ws/allure-report || true"
+                '''
+              }
         }
 
         stage('Start Selenium Grid') {
@@ -59,39 +58,10 @@ pipeline {
                               -DhubHost=selenium-hub \
                               -Dci=true
                         """
-                    }
-                }
-
-            }
-        }
-
-        stage('Generate Allure Report') {
-            steps {
-                script {
-                    sh """
-                        docker run --rm \
-                          -v jenkins_home:/var/jenkins_home \
-                          -v \$(pwd):/workspace \
-                          alpine:latest \
-                          sh -c 'cp -r /var/jenkins_home/workspace/SeleniumGridPipeline/allure-results /workspace/ || true'
-                    """
-
-                    sh """
-                        ${DOCKER_COMPOSE} run --rm maven-tests \
-                          mvn allure:report
-                    """
-
-                    sh """
-                        docker run --rm \
-                          -v jenkins_home:/var/jenkins_home \
-                          -v \$(pwd):/workspace \
-                          alpine:latest \
-                          sh -c 'cp -r /var/jenkins_home/workspace/SeleniumGridPipeline/target/site/allure-maven-plugin /workspace/target/site/ || true'
-                    """
+                        }
                 }
             }
         }
-
     }
 
     post {
@@ -106,7 +76,7 @@ pipeline {
                     jdk: '',
                     properties: [],
                     reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'allure-results']]
+                    results: [[path: 'target/allure-results']]
                 ])
                 
                 echo 'Cleaning up containers...'

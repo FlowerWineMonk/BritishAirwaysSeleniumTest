@@ -35,15 +35,14 @@ services:
 
   maven-tests:
     image: maven:3.9.9-eclipse-temurin-21
-    container_name: maven-tests
-    working_dir: /var/jenkins_home/workspace/SeleniumGridPipeline
+    working_dir: /workspace/SeleniumGridPipeline
     volumes:
-      - jenkins_home:/var/jenkins_home
+      - /var/jenkins_home/workspace/SeleniumGridPipeline:/workspace
+      - maven-repo:/root/.m2
     depends_on:
       selenium-hub:
         condition: service_healthy
     restart: "no"
 
 volumes:
-  jenkins_home:
-    external: true
+  maven-repo:

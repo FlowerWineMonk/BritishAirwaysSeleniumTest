@@ -2,6 +2,9 @@ FROM jenkins/jenkins:lts
 
 USER root
 
+RUN groupadd -f -g 994 docker && \
+  usermod -aG docker jenkins
+
 RUN apt-get update && apt-get install -y \
   ca-certificates curl gnupg lsb-release && \
   rm -rf /var/lib/apt/lists/*

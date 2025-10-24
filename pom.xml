@@ -100,6 +100,9 @@
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
         <version>${allure-maven.version}</version>
+        <configuration>
+            <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+        </configuration>
       </plugin>
     </plugins>
   </build>
