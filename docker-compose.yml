@@ -1,8 +1,11 @@
-version: "3"
 services:
   selenium-hub:
     image: selenium/hub:4.35.0-20250828
     container_name: selenium-hub
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    network_mode: bridge
     ports:
       - "4444:4444"
     healthcheck:
@@ -14,6 +17,10 @@ services:
   chrome:
     image: selenium/node-chrome:4.35.0-20250828
     shm_size: 2gb
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    network_mode: bridge
     depends_on:
       selenium-hub:
         condition: service_healthy
@@ -25,6 +32,10 @@ services:
   firefox:
     image: selenium/node-firefox:4.35.0-20250828
     shm_size: 2gb
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    network_mode: bridge
     depends_on:
       selenium-hub:
         condition: service_healthy
