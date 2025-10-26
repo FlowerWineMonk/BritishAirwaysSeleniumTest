@@ -16,10 +16,13 @@ pipeline {
         stage('Clean Previous Results') {
             steps {
                 sh '''
-                  docker run --rm -v ${WORKSPACE}:/ws alpine:3.18 \
-                    sh -c "rm -rf /ws/target/allure-results /ws/target/surefire-reports /ws/allure-report || true"
+                  docker run --rm \
+                    --user 1000:1000 \
+                    -v jenkins_home:/var/jenkins_home \
+                    alpine:3.18 \
+                    sh -c "rm -rf /var/jenkins_home/workspace/SeleniumGridPipeline/target || true"
                 '''
-              }
+            }
         }
 
         stage('Start Selenium Grid') {
