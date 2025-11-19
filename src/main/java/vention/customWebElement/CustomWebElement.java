@@ -44,6 +44,42 @@ public class CustomWebElement implements BaseElement {
     return new Select(getWrappedElement());
   }
 
+  public void customSelectFare(CustomWebElement fareId, String fareWay, int timeout) {
+    CustomWebElement reloadedFare = WaitUtils.waitForElementReload(fareId, timeout);
+    reloadedFare.asSelect().selectByValue(fareWay);
+  }
+
+  public void customDropdownReload(CustomWebElement dropdownId, String dropdownKeys,
+      CustomWebElement dynamicAirportOption, String cityInfo, int timeout) {
+    CustomWebElement reloadedDropdown = WaitUtils.waitForElementReload(dropdownId, timeout);
+    reloadedDropdown.getWrappedElement().clear();
+    reloadedDropdown.sendKeys(dropdownKeys);
+
+    CustomWebElement reloadedOption = WaitUtils.waitForElementReload(dynamicAirportOption.withArgs(cityInfo),
+        timeout);
+    reloadedOption.click();
+  }
+
+  public void customDepartureDate(CustomWebElement departureDateButton, CustomWebElement dynamicDateOption, String date,
+      int timeout) {
+    CustomWebElement reloadedDepartureDateButton = WaitUtils.waitForElementReload(departureDateButton, timeout);
+    reloadedDepartureDateButton.click();
+
+    CustomWebElement reloadedDateOption = WaitUtils.waitForElementReload(
+        dynamicDateOption.withArgs(date), timeout);
+    reloadedDateOption.click();
+  }
+
+  public void customClick(CustomWebElement findFlightsButton, int timeout) {
+    CustomWebElement reloadedFindFlightsButton = WaitUtils.waitForElementReload(findFlightsButton, timeout);
+    reloadedFindFlightsButton.click();
+  }
+
+  public void customSelect(CustomWebElement element, String value, String cssSelector, int timeout) {
+    WaitUtils.waitForVisibilityOfElementLocated(cssSelector, timeout);
+    element.asSelect().selectByValue(value);
+  }
+
   @Override
   public void click() {
     WaitUtils.waitElementToBeClickable(this).getWrappedElement().click();

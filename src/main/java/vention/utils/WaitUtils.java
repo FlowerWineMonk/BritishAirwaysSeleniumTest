@@ -40,6 +40,11 @@ public class WaitUtils {
     return createWait(seconds).until(ExpectedConditions.urlContains(partialUrl));
   }
 
+  public static void waitForVisibilityOfElementLocated(String cssSelector, int seconds) {
+    By locator = By.cssSelector(cssSelector);
+    createWait(seconds).until(ExpectedConditions.visibilityOfElementLocated(locator));
+  }
+
   public static CustomWebElement waitForElementReload(CustomWebElement customElement, int seconds) {
     By locator = customElement.getCurrentLocator();
     try {

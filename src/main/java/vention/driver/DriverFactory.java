@@ -4,29 +4,78 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.MutableCapabilities;
+import java.net.URL;
 
 public class DriverFactory {
-  public static WebDriver createLocalDriver(BrowserType browser) {
-    WebDriver driver = switch (browser) {
-      case CHROME -> getChromeDriver();
-      case FIREFOX -> getFirefoxDriver();
-      default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
+  public static WebDriver createInstance() {
+    String browserName = System.getProperty("browser", "chrome").toLowerCase();
+    String hubHost = System.getProperty("hubHost", System.getenv("HUB_HOST"));
+
+    return switch (browserName) {
+      case "chrome" -> getLocalChromeDriver();
+      case "firefox" -> getLocalFirefoxDriver();
+      case "remote-chrome" -> getRemoteDriver(getChromeOptions(), hubHost);
+      case "remote-firefox" -> getRemoteDriver(getFirefoxOptions(), hubHost);
+      default -> throw new IllegalArgumentException("Unsupported browser: " + browserName);
     };
-    driver.manage().window().fullscreen();
-    return driver;
   }
 
-  private static WebDriver getChromeDriver() {
+  private static WebDriver getLocalChromeDriver() {
+    return new ChromeDriver(getChromeOptions());
+  }
+
+  private static WebDriver getLocalFirefoxDriver() {
+    return new FirefoxDriver(getFirefoxOptions());
+  }
+
+  private static ChromeOptions getChromeOptions() {
     ChromeOptions options = new ChromeOptions();
-    options.addArguments("--start-fullscreen");
-    return new ChromeDriver(options);
+
+    if (isCI()) {
+      options.addArguments("--headless=new");
+      options.addArguments("--no-sandbox");
+      options.addArguments("--disable-dev-shm-usage");
+      options.addArguments("--disable-gpu");
+      options.addArguments("--window-size=1920,1080");
+    } else {
+      options.addArguments("--start-maximized");
+    }
+
+    return options;
   }
 
-  private static WebDriver getFirefoxDriver() {
-    return new FirefoxDriver();
+  private static FirefoxOptions getFirefoxOptions() {
+    FirefoxOptions options = new FirefoxOptions();
+    if (isCI()) {
+      options.addArguments("--headless");
+      options.addArguments("--width=1920");
+      options.addArguments("--height=1080");
+    } else {
+      options.addArguments("--width=1920");
+      options.addArguments("--height=1080");
+    }
+    return options;
   }
 
-  public enum BrowserType {
-    CHROME, FIREFOX
-  };
+  private static boolean isCI() {
+    return "true"
+        .equals(System.getProperty("ci")) || System.getenv("CI") != null || System.getenv("JENKINS_URL") != null;
+  }
+
+  private static WebDriver getRemoteDriver(MutableCapabilities options, String hubHost) {
+    if (hubHost == null || hubHost.isEmpty()) {
+      throw new RuntimeException("hubHost is not set! Pass -DhubHost=selenium-hub");
+    }
+
+    String remoteUrl = "http://" + hubHost + ":4444";
+
+    try {
+      return new RemoteWebDriver(new URL(remoteUrl), options);
+    } catch (Exception e) {
+      throw new RuntimeException("Failed to create RemoteWebDriver with URL: " + remoteUrl, e);
+    }
+  }
 }

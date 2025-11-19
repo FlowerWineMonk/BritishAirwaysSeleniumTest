@@ -1,0 +1,62 @@
+services:
+  selenium-hub:
+    image: selenium/hub:4.35.0-20250828
+    container_name: selenium-hub
+    dns:
+      - 192.168.144.4
+      - 192.168.10.53
+      - 8.8.8.8
+    ports:
+      - "4444:4444"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:4444/status || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  chrome:
+    image: selenium/node-chrome:4.35.0-20250828
+    shm_size: 2gb
+    dns:
+      - 192.168.144.4
+      - 192.168.10.53
+      - 8.8.8.8
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  firefox:
+    image: selenium/node-firefox:4.35.0-20250828
+    shm_size: 2gb
+    dns:
+      - 192.168.144.4
+      - 192.168.10.53
+      - 8.8.8.8
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  maven-tests:
+    image: maven:3.9.9-eclipse-temurin-21
+    user: "1000:1000"
+    working_dir: /var/jenkins_home/workspace/SeleniumGridPipeline
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - maven-repo:/home/ubuntu/.m2
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+    restart: "no"
+
+volumes:
+  maven-repo:
+  jenkins_home:
+    external: true

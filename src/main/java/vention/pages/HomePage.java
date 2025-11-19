@@ -3,12 +3,11 @@ package vention.pages;
 import vention.customWebElement.CustomWebElement;
 import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
-import vention.utils.WaitUtils;
 
 public class HomePage extends BasePage {
   private static final String RELATIVE_PATH = "/travel/home/public/en_us/";
 
-  @FindBy(id = "fare")
+  @FindBy(id = "fareSelector")
   private CustomWebElement fareDropDown;
 
   @FindBy(id = "from")
@@ -40,46 +39,27 @@ public class HomePage extends BasePage {
 
   @Step("Select fare type: {fareWay}")
   public void selectFare(String fareWay) {
-    CustomWebElement reloadedFare = WaitUtils.waitForElementReload(fareDropDown, 10);
-    reloadedFare.asSelect().selectByValue(fareWay);
+    fareDropDown.customSelectFare(fareDropDown, fareWay, 10);
   }
 
   @Step("Enter departure city: {fromCity} and select airport: {fromCityInfo}")
   public void enterFromDestination(String fromCity, String fromCityInfo) {
-    CustomWebElement reloadedFromInput = WaitUtils.waitForElementReload(fromInput, 10);
-    reloadedFromInput.getWrappedElement().clear();
-    reloadedFromInput.sendKeys(fromCity);
-
-    CustomWebElement reloadedAirportOption = WaitUtils.waitForElementReload(
-        dynamicAirportOption.withArgs(fromCityInfo), 10);
-    reloadedAirportOption.click();
+    fromInput.customDropdownReload(fromInput, fromCity, dynamicAirportOption, fromCityInfo, 10);
   }
 
   @Step("Enter destination city: {toCity} and select airport: {toCityInfo}")
   public void enterToDestination(String toCity, String toCityInfo) {
-    CustomWebElement reloadedToInput = WaitUtils.waitForElementReload(toInput, 10);
-    reloadedToInput.getWrappedElement().clear();
-    reloadedToInput.sendKeys(toCity);
-
-    CustomWebElement reloadedAirportOption = WaitUtils.waitForElementReload(
-        dynamicAirportOption.withArgs(toCityInfo), 10);
-    reloadedAirportOption.click();
+    toInput.customDropdownReload(toInput, toCity, dynamicAirportOption, toCityInfo, 10);
   }
 
   @Step("Select departure date: {date}")
   public void selectDepartureDate(String date) {
-    CustomWebElement reloadedDepartureDateButton = WaitUtils.waitForElementReload(departureDateButton, 5);
-    reloadedDepartureDateButton.click();
-
-    CustomWebElement reloadedDateOption = WaitUtils.waitForElementReload(
-        dynamicDateOption.withArgs(date), 5);
-    reloadedDateOption.click();
+    departureDateButton.customDepartureDate(departureDateButton, dynamicDateOption, date, 10);
   }
 
   @Step("Click find flights")
   public void clickFindFlightsButton() {
-    CustomWebElement reloadedFindFlightsButton = WaitUtils.waitForElementReload(findFlightsButton, 5);
-    reloadedFindFlightsButton.click();
+    findFlightsButton.customClick(findFlightsButton, 10);
   }
 
   public boolean isSelectFareDisplayed() {
